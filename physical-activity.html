@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physical Activity | Heart Disease Prevention</title>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e40af;
+            --primary-light: #3b82f6;
+            --secondary: #475569;
+            --background: #f8fafc;
+            --white: #ffffff;
+            --accent: #f97316;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(to bottom, #f0f9ff, var(--white));
+            color: var(--secondary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-light);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                        url('https://images.pexels.com/photos/2803158/pexels-photo-2803158.jpeg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 6rem 0;
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .back-home {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--white);
+            color: var(--primary);
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .back-home:hover {
+            background-color: var(--primary);
+            color: var(--white);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        /* Content Sections */
+        .content-section {
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 3rem;
+            overflow: hidden;
+        }
+
+        .section-header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem;
+        }
+
+        .section-header h2 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+
+        .section-body {
+            padding: 2rem;
+        }
+
+        .key-facts {
+            margin: 2rem 0;
+        }
+
+        .fact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .fact-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .fact-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .fact-content h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Exercise Types Grid */
+        .exercise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .exercise-card {
+            background: #f8fafc;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .exercise-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+
+        .exercise-img {
+            height: 180px;
+            overflow: hidden;
+        }
+
+        .exercise-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .exercise-card:hover .exercise-img img {
+            transform: scale(1.1);
+        }
+
+        .exercise-content {
+            padding: 1.5rem;
+        }
+
+        .exercise-content h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .intensity-meter {
+            display: flex;
+            align-items: center;
+            margin-top: 1rem;
+        }
+
+        .intensity-label {
+            margin-right: 1rem;
+            font-weight: 500;
+        }
+
+        .intensity-dots {
+            display: flex;
+            gap: 3px;
+        }
+
+        .intensity-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #cbd5e1;
+        }
+
+        .intensity-dot.active {
+            background: var(--primary);
+        }
+
+        /* Image Slider */
+        .slider-container {
+            position: relative;
+            max-width: 100%;
+            margin: 2rem 0;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .slide {
+            min-width: 100%;
+            transition: opacity 0.5s;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .slide-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0));
+            color: white;
+            padding: 1.5rem;
+        }
+
+        .slide-content h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .slider-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #cbd5e1;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .slider-dot.active {
+            background: var(--primary);
+            transform: scale(1.2);
+        }
+
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.7);
+            color: var(--primary);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .slider-btn:hover {
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .prev-btn {
+            left: 15px;
+        }
+
+        .next-btn {
+            right: 15px;
+        }
+
+        /* Progress Chart */
+        .chart-container {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 8px;
+        }
+
+        .chart-title {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .chart {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            height: 250px;
+            margin-bottom: 1rem;
+        }
+
+        .chart-bar {
+            flex: 1;
+            margin: 0 3px;
+            background: var(--primary-light);
+            border-radius: 4px 4px 0 0;
+            position: relative;
+            min-height: 20px;
+            transition: height 1s;
+        }
+
+        .chart-label {
+            text-align: center;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .chart-tooltip {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .chart-bar:hover .chart-tooltip {
+            opacity: 1;
+        }
+
+        /* Video Section */
+        .video-container {
+            margin: 2rem 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .video-responsive {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-responsive iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Weekly Plan */
+        .weekly-plan {
+            margin: 2rem 0;
+        }
+
+        .days-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .day-card {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 1.2rem;
+            border-top: 3px solid var(--primary);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        .day-title {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        /* Research and Survey */
+        .research-card {
+            background: #f8fafc;
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .research-source {
+            font-style: italic;
+            color: var(--secondary);
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: var(--white);
+            padding: 3rem 0 1.5rem;
+            margin-top: 4rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: #e2e8f0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .fact-item {
+                flex-direction: column;
+            }
+
+            .fact-icon {
+                margin-bottom: 1rem;
+            }
+
+            .slider-btn {
+                width: 30px;
+                height: 30px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+   
+
+    <section class="hero">
+        <div class="container">
+            <h1>Physical Activity</h1>
+            <p class="hero-subtitle">Regular physical activity is one of the most effective ways to prevent heart disease and improve overall cardiovascular health.</p>
+            <a href="prevation.html" class="back-home">
+                <i class='bx bx-arrow-back'></i> Back to Home
+            </a>
+        </div>
+    </section>
+
+    <main class="container">
+        <section id="benefits" class="content-section">
+            <div class="section-header">
+                <h2>Benefits of Physical Activity for Heart Health</h2>
+            </div>
+            <div class="section-body">
+                <p>Regular physical activity offers numerous benefits for your cardiovascular system and can significantly reduce your risk of heart disease. The American Heart Association recommends at least 150 minutes of moderate-intensity aerobic activity or 75 minutes of vigorous activity per week, along with muscle-strengthening activities twice a week.</p>
+                
+                <div class="key-facts">
+                    <div class="fact-item">
+                        <i class='bx bx-check-circle fact-icon'></i>
+                        <div class="fact-content">
+                            <h3>Strengthens Your Heart</h3>
+                            <p>Regular exercise strengthens your heart muscle, allowing it to pump more blood with less effort. This reduces the force on your arteries, potentially lowering blood pressure.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="fact-item">
+                        <i class='bx bx-check-circle fact-icon'></i>
+                        <div class="fact-content">
+                            <h3>Improves Cholesterol Levels</h3>
+                            <p>Physical activity can increase the level of high-density lipoprotein (HDL, or "good") cholesterol while reducing low-density lipoprotein (LDL, or "bad") cholesterol and triglycerides.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="fact-item">
+                        <i class='bx bx-check-circle fact-icon'></i>
+                        <div class="fact-content">
+                            <h3>Helps Maintain Healthy Weight</h3>
+                            <p>Regular physical activity helps you maintain a healthy weight, which reduces strain on your heart and decreases risk factors associated with heart disease.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="fact-item">
+                        <i class='bx bx-check-circle fact-icon'></i>
+                        <div class="fact-content">
+                            <h3>Reduces Stress</h3>
+                            <p>Exercise is a natural stress reliever, helping to reduce levels of stress hormones that can put extra burden on your heart.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chart-container">
+                    <h3 class="chart-title">Risk Reduction by Activity Level</h3>
+                    <div class="chart">
+                        <div class="chart-bar" style="height: 40%;">
+                            <span class="chart-tooltip">15%</span>
+                        </div>
+                        <div class="chart-bar" style="height: 60%;">
+                            <span class="chart-tooltip">25%</span>
+                        </div>
+                        <div class="chart-bar" style="height: 80%;">
+                            <span class="chart-tooltip">35%</span>
+                        </div>
+                        <div class="chart-bar" style="height: 100%;">
+                            <span class="chart-tooltip">45%</span>
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <div class="chart-label">Light<br>(1-2 hrs/week)</div>
+                        <div class="chart-label">Moderate<br>(2-3 hrs/week)</div>
+                        <div class="chart-label">Active<br>(3-5 hrs/week)</div>
+                        <div class="chart-label">Very Active<br>(5+ hrs/week)</div>
+                    </div>
+                    <p style="text-align: center; margin-top: 1rem; font-size: 0.9rem; color: var(--secondary);">
+                        Percentage reduction in heart disease risk
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="exercise-types" class="content-section">
+            <div class="section-header">
+                <h2>Types of Heart-Healthy Exercise</h2>
+            </div>
+            <div class="section-body">
+                <p>Different types of physical activity offer various benefits for heart health. Incorporating a mix of these exercise types into your routine provides comprehensive cardiovascular benefits:</p>
+                
+                <div class="exercise-grid">
+                    <div class="exercise-card">
+                        <div class="exercise-img">
+                            <img src="https://images.pexels.com/photos/2803158/pexels-photo-2803158.jpeg" alt="Aerobic Exercise">
+                        </div>
+                        <div class="exercise-content">
+                            <h3>Aerobic Exercise</h3>
+                            <p>Activities that increase your breathing and heart rate, such as walking, running, swimming, and cycling.</p>
+                            <div class="intensity-meter">
+                                <span class="intensity-label">Intensity:</span>
+                                <div class="intensity-dots">
+                                    <div class="intensity-dot active"></div>
+                                    <div class="intensity-dot active"></div>
+                                    <div class="intensity-dot active"></div>
+                                    <div class="intensity-dot"></div>
+                                    <div class="intensity-dot"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="exercise-card">
+                        <div class="exercise-img">
+                            <img src="https://images.pexels.com/photos/4162487/pexels-photo-4162487.jpeg" alt="Strength Training">
+                        </div>
+                        <div class="exercise-content">
+                            <h3>Strength Training</h3>
+                            <p>Activities that build muscle strength, such as weight lifting, resistance bands, and bodyweight exercises.</p>
+                            <div class="intensity-meter">
+                                <span class="intensity-label">Intensity:</span>
+                                <div class="intensity-dots">
+                                    <div class="intensity-dot active"></div>
+                                    <div class="intensity-dot active"></div>
+                                    <div class="intensity-dot active"></div>
+                                    <div class="intensity-dot active"></div>
+                                    <div class="intensity-dot"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="exercise-card">
+                        <div class="exercise-img">
+                            <img src="https://images.pexels.com/photos/6111616/pexels-photo-6111616.jpeg" alt="Flexibility Exercises">
+                        </div>
+                        <div class="exercise-content">
+                            <h3>Flexibility Exercises</h3>
+                            <p>Activities that improve range of motion, such as stretching, yoga, and tai chi.</p>
+                            <div class="intensity-meter">
+                                <span class="intensity-label">Intensity:</span>
+                                <div class="intensity-dots">
+                                    <div class="intensity-dot active"></div>
+                                    <div class="intensity-dot active"></div>
+                                    <div class="intensity-dot"></div>
+                                    <div class="intensity-dot"></div>
+                                    <div class="intensity-dot"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="exercise-card">
+                        <div class="exercise-img">
+                            <img src="https://images.pexels.com/photos/2827392/pexels-photo-2827392.jpeg" alt="HIIT">
+                        </div>
+                        <div class="exercise-content">
+                            <h3>High Intensity Interval Training</h3>
+                            <p>Short bursts of intense activity alternated with recovery periods, providing efficient cardiovascular benefits.</p>
+                            <div class="intensity-meter">
+                                <span class="intensity-label">Intensity:</span>
+                                <div class="intensity-dots">
+                                    <div class="intensity-dot active"></div>
+                                    <div class="intensity-dot active"></div>
+                                    <div class="intensity-dot active"></div>
+                                    <div class="intensity-dot active"></div>
+                                    <div class="intensity-dot active"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="slider-container">
+                    <div class="slider">
+                        <div class="slide">
+                            <img src="https://images.pexels.com/photos/4498362/pexels-photo-4498362.jpeg" alt="Walking">
+                            <div class="slide-content">
+                                <h3>Walking: The Perfect Starting Point</h3>
+                                <p>Brisk walking for 30 minutes daily can reduce heart disease risk by up to 20%. It's accessible, requires no equipment, and is perfect for beginners.</p>
+                            </div>
+                        </div>
+                        <div class="slide">
+                            <img src="https://images.pexels.com/photos/3755501/pexels-photo-3755501.jpeg" alt="Swimming">
+                            <div class="slide-content">
+                                <h3>Swimming: Full-Body Cardio</h3>
+                                <p>Swimming is gentle on joints while providing excellent cardiovascular benefits, making it ideal for people with arthritis or joint pain.</p>
+                            </div>
+                        </div>
+                        <div class="slide">
+                            <img src="https://images.pexels.com/photos/2827392/pexels-photo-2827392.jpeg" alt="HIIT Workout">
+                            <div class="slide-content">
+                                <h3>HIIT: Time-Efficient Exercise</h3>
+                                <p>Research shows just 20 minutes of high-intensity interval training can provide comparable benefits to longer moderate-intensity workouts.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="slider-btn prev-btn"><i class='bx bx-chevron-left'></i></button>
+                    <button class="slider-btn next-btn"><i class='bx bx-chevron-right'></i></button>
+                    <div class="slider-nav">
+                        <div class="slider-dot active"></div>
+                        <div class="slider-dot"></div>
+                        <div class="slider-dot"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="section-header">
+                <h2>Expert Guidance on Getting Started</h2>
+            </div>
+            <div class="section-body">
+                <p>Watch this informative video on how to start a heart-healthy exercise routine safely:</p>
+                <div class="video-container">
+                    <div class="video-responsive">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/PvMxDn9LrVs" title="Heart-Healthy Exercise" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <p>Always consult with your healthcare provider before starting a new exercise program, especially if you have existing heart conditions, are over 40, or have been inactive for a long period.</p>
+            </div>
+        </section>
+
+        <section id="weekly-plan" class="content-section">
+            <div class="section-header">
+                <h2>Sample Weekly Exercise Plan</h2>
+            </div>
+            <div class="section-body">
+                <p>Here's a balanced weekly exercise plan that incorporates various types of physical activity for optimal heart health. This plan is designed for intermediate fitness levels but can be adjusted based on your personal fitness level and health status.</p>
+                
+                <div class="weekly-plan">
+                    <div class="days-grid">
+                        <div class="day-card">
+                            <h4 class="day-title">Monday</h4>
+                            <p><strong>Aerobic:</strong> 30-minute brisk walk or jog</p>
+                            <p><strong>Strength:</strong> 10-15 minutes of bodyweight exercises</p>
+                        </div>
+                        
+                        <div class="day-card">
+                            <h4 class="day-title">Tuesday</h4>
+                            <p><strong>Flexibility:</strong> 30-minute yoga or stretching session</p>
+                            <p><strong>Balance:</strong> 10 minutes of balance exercises</p>
+                        </div>
+                        
+                        <div class="day-card">
+                            <h4 class="day-title">Wednesday</h4>
+                            <p><strong>HIIT:</strong> 20-minute high-intensity interval training</p>
+                            <p><strong>Cool down:</strong> 10 minutes of stretching</p>
+                        </div>
+                        
+                        <div class="day-card">
+                            <h4 class="day-title">Thursday</h4>
+                            <p><strong>Rest Day:</strong> Light activity like casual walking or gentle stretching</p>
+                        </div>
+                        
+                        <div class="day-card">
+                            <h4 class="day-title">Friday</h4>
+                            <p><strong>Strength:</strong> 30-minute full-body resistance training</p>
+                            <p><strong>Flexibility:</strong> 10 minutes of stretching</p>
+                        </div>
+                        
+                        <div class="day-card">
+                            <h4 class="day-title">Saturday</h4>
+                            <p><strong>Aerobic:</strong> 45-60 minute longer activity (cycling, swimming, hiking)</p>
+                        </div>
+                        
+                        <div class="day-card">
+                            <h4 class="day-title">Sunday</h4>
+                            <p><strong>Active Recovery:</strong> Light yoga, walking, or recreational activities</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <p style="margin-top: 1.5rem;">Remember to start gradually if you're new to exercise. Begin with shorter durations and lower intensities, and progressively increase as your fitness improves. Listen to your body and allow for adequate recovery between sessions.</p>
+            </div>
+        </section>
+
+        <section id="research" class="content-section">
+            <div class="section-header">
+                <h2>Research and Survey Findings</h2>
+            </div>
+            <div class="section-body">
+                <p>Scientific research consistently demonstrates the powerful benefits of physical activity for heart health. Here are some key findings from recent studies and surveys:</p>
+                
+                <div class="research-card">
+                    <h3>Physical Activity and Cardiovascular Disease Risk</h3>
+                    <p>A meta-analysis of 33 studies found that individuals who engaged in regular moderate to vigorous physical activity had a 35% lower risk of cardiovascular disease mortality compared to those who were physically inactive.</p>
+                    <p class="research-source">Source: Wahid A, et al. Quantifying the Association Between Physical Activity and Cardiovascular Disease and Diabetes: A Systematic Review and Meta-Analysis. Journal of the American Heart Association, 2016.</p>
+                </div>
+                
+                <div class="research-card">
+                    <h3>Exercise Intensity and Heart Health</h3>
+                    <p>The HUNT Fitness Study found that a single weekly session of high-intensity exercise reduced the risk of cardiovascular death by 30-40% compared to those who were inactive, suggesting that even small amounts of intense activity can provide significant benefits.</p>
+                    <p class="research-source">Source: Wisløff U, et al. High-Intensity Interval Training to Maximize Cardiac Benefits of Exercise Training? Exercise and Sport Sciences Reviews, 2017.</p>
+                </div>
+                
+                <div class="research-card">
+                    <h3>American Heart Association Survey on Exercise Habits</h3>
+                    <p>According to a nationwide survey conducted by the American Heart Association in 2022, only 23% of American adults meet both the aerobic and muscle-strengthening guidelines. Among those who don't exercise regularly, lack of time (42%) and uncertainty about what exercises to do (38%) were the most commonly cited barriers.</p>
+                    <p class="research-source">Source: American Heart Association National Exercise Survey, 2022.</p>
+                </div>
+                
+                <div class="research-card">
+                    <h3>Physical Activity in Cardiac Rehabilitation</h3>
+                    <p>A study of cardiac rehabilitation patients showed that structured exercise programs reduced cardiovascular mortality by 26% and hospital readmissions by 18% compared to standard care without exercise components.</p>
+                    <p class="research-source">Source: Anderson L, et al. Exercise-Based Cardiac Rehabilitation for Coronary Heart Disease. Cochrane Database of Systematic Reviews, 2021.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h4>About HeartHealth</h4>
+                    <p>Dedicated to promoting heart health and preventing cardiovascular disease through education and awareness.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="diet.html">Heart-Healthy Diet</a></li>
+                        <li><a href="blood-pressure.html">Blood Pressure</a></li>
+                        <li><a href="stress-management.html">Stress Management</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <ul class="footer-links">
+                        <li><i class='bx bx-phone'></i> (123) 456-7890</li>
+                        <li><i class='bx bx-envelope'></i> info@hearthealth.org</li>
+                        <li><i class='bx bx-map'></i> 123 Health Street, Medical District</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 HeartHealth. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Slider functionality
+        const slider = document.querySelector('.slider');
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.slider-dot');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+        let currentSlide = 0;
+        const slideCount = slides.length;
+        
+        function goToSlide(index) {
+            if (index < 0) index = slideCount - 1;
+            if (index >= slideCount) index = 0;
+            
+            slider.style.transform = `translateX(-${index * 100}%)`;
+            currentSlide = index;
+            
+            // Update dots
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentSlide);
+            });
+        }
+        
+        // Set up event listeners
+        prevBtn.addEventListener('click', () => goToSlide(currentSlide - 1));
+        nextBtn.addEventListener('click', () => goToSlide(currentSlide + 1));
+        
+        dots.forEach((dot, i) => {
+            dot.addEventListener('click', () => goToSlide(i));
+        });
+        
+        // Auto-advance slides
+        let slideInterval = setInterval(() => {
+            goToSlide(currentSlide + 1);
+        }, 5000);
+        
+        // Pause auto-advance on hover
+        slider.addEventListener('mouseenter', () => {
+            clearInterval(slideInterval);
+        });
+        
+        slider.addEventListener('mouseleave', () => {
+            slideInterval = setInterval(() => {
+                goToSlide(currentSlide + 1);
+            }, 5000);
+        });
+        
+        // Animate chart bars on scroll
+        const chartBars = document.querySelectorAll('.chart-bar');
+        const originalHeights = [];
+        
+        // Store original heights and set initial height to 0
+        chartBars.forEach(bar => {
+            originalHeights.push(bar.style.height);
+            bar.style.height = '0%';
+        });
+        
+        // Create an intersection observer
+        const barObserver = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                // Animate the bars to their original heights
+                chartBars.forEach((bar, index) => {
+                    setTimeout(() => {
+                        bar.style.height = originalHeights[index];
+                    }, index * 200); // Staggered animation
+                });
+                
+                // Stop observing after animation
+                barObserver.unobserve(entries[0].target);
+            }
+        }, { threshold: 0.5 });
+        
+        // Start observing the chart container
+        const chartContainer = document.querySelector('.chart-container');
+        if (chartContainer) {
+            barObserver.observe(chartContainer);
+        }
+        
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

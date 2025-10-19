@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitor Blood Pressure | Heart Disease Prevention</title>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e40af;
+            --primary-light: #3b82f6;
+            --secondary: #475569;
+            --background: #f8fafc;
+            --white: #ffffff;
+            --accent: #f97316;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --normal-bp: #16a34a;
+            --elevated-bp: #eab308;
+            --high-bp-1: #f97316;
+            --high-bp-2: #ef4444;
+            --crisis-bp: #be123c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(to bottom, #f0f9ff, var(--white));
+            color: var(--secondary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-light);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                        url('https://images.pexels.com/photos/4226925/pexels-photo-4226925.jpeg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 6rem 0;
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .back-home {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--white);
+            color: var(--primary);
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .back-home:hover {
+            background-color: var(--primary);
+            color: var(--white);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        /* Content Sections */
+        .content-section {
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 3rem;
+            overflow: hidden;
+        }
+
+        .section-header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem;
+        }
+
+        .section-header h2 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+
+        .section-body {
+            padding: 2rem;
+        }
+
+        /* BP Classification */
+        .bp-classification {
+            margin: 2rem 0;
+        }
+
+        .bp-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .bp-table th, .bp-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .bp-table th {
+            background: #f1f5f9;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .bp-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .bp-category {
+            font-weight: 600;
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            display: inline-block;
+            color: white;
+        }
+
+        .normal {
+            background-color: var(--normal-bp);
+        }
+
+        .elevated {
+            background-color: var(--elevated-bp);
+        }
+
+        .stage-1 {
+            background-color: var(--high-bp-1);
+        }
+
+        .stage-2 {
+            background-color: var(--high-bp-2);
+        }
+
+        .crisis {
+            background-color: var(--crisis-bp);
+        }
+
+        /* Key facts */
+        .key-facts {
+            margin: 2rem 0;
+        }
+
+        .fact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .fact-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .fact-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .fact-content h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        /* BP Monitoring Methods */
+        .methods-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .method-card {
+            background: #f8fafc;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .method-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .method-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .method-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .method-card:hover .method-img img {
+            transform: scale(1.1);
+        }
+
+        .method-content {
+            padding: 1.5rem;
+        }
+
+        .method-content h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .method-pros-cons {
+            margin-top: 1rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .pros, .cons {
+            flex: 1;
+        }
+
+        .pros h4, .cons h4 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .pros h4 {
+            color: var(--success);
+        }
+
+        .cons h4 {
+            color: var(--error);
+        }
+
+        .pros ul, .cons ul {
+            padding-left: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        /* Image Slider */
+        .slider-container {
+            position: relative;
+            max-width: 100%;
+            margin: 2rem 0;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .slide {
+            min-width: 100%;
+            transition: opacity 0.5s;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .slide-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0));
+            color: white;
+            padding: 1.5rem;
+        }
+
+        .slide-content h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .slider-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #cbd5e1;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .slider-dot.active {
+            background: var(--primary);
+            transform: scale(1.2);
+        }
+
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.7);
+            color: var(--primary);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .slider-btn:hover {
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .prev-btn {
+            left: 15px;
+        }
+
+        .next-btn {
+            right: 15px;
+        }
+
+        /* Video Section */
+        .video-container {
+            margin: 2rem 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .video-responsive {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-responsive iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Steps for BP Monitoring */
+        .steps-container {
+            margin: 2rem 0;
+        }
+
+        .step-item {
+            display: flex;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .step-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .step-item::before {
+            content: '';
+            position: absolute;
+            left: 22px;
+            top: 40px;
+            bottom: -20px;
+            width: 2px;
+            background: var(--primary-light);
+        }
+
+        .step-item:last-child::before {
+            display: none;
+        }
+
+        .step-number {
+            width: 45px;
+            height: 45px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-right: 1.5rem;
+            flex-shrink: 0;
+            z-index: 2;
+        }
+
+        .step-content h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Research and Survey */
+        .research-card {
+            background: #f8fafc;
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .research-source {
+            font-style: italic;
+            color: var(--secondary);
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        /* BP Tracker Tool */
+        .tool-container {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .bp-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            padding: 0.75rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: #e2e8f0;
+            color: var(--secondary);
+        }
+
+        .btn-secondary:hover {
+            background: #cbd5e1;
+        }
+
+        .bp-result {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .bp-result.normal {
+            background: rgba(22, 163, 74, 0.1);
+            border: 1px solid var(--normal-bp);
+        }
+
+        .bp-result.elevated {
+            background: rgba(234, 179, 8, 0.1);
+            border: 1px solid var(--elevated-bp);
+        }
+
+        .bp-result.stage-1 {
+            background: rgba(249, 115, 22, 0.1);
+            border: 1px solid var(--high-bp-1);
+        }
+
+        .bp-result.stage-2 {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid var(--high-bp-2);
+        }
+
+        .bp-result.crisis {
+            background: rgba(190, 18, 60, 0.1);
+            border: 1px solid var(--crisis-bp);
+        }
+
+        .bp-result h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: var(--white);
+            padding: 3rem 0 1.5rem;
+            margin-top: 4rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: #e2e8f0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .fact-item {
+                flex-direction: column;
+            }
+
+            .fact-icon {
+                margin-bottom: 1rem;
+            }
+
+            .slider-btn {
+                width: 30px;
+                height: 30px;
+                font-size: 1rem;
+            }
+
+            .method-pros-cons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+   
+
+    <section class="hero">
+        <div class="container">
+            <h1>Monitor Blood Pressure</h1>
+            <p class="hero-subtitle">Understanding and regularly monitoring your blood pressure is one of the most important steps you can take to prevent heart disease.</p>
+            <a href="prevation.html" class="back-home">
+                <i class='bx bx-arrow-back'></i> Back to Home
+            </a>
+        </div>
+    </section>
+
+    <main class="container">
+        <section id="understanding" class="content-section">
+            <div class="section-header">
+                <h2>Understanding Blood Pressure</h2>
+            </div>
+            <div class="section-body">
+                <p>Blood pressure is the force of blood pushing against the walls of your arteries as your heart pumps blood. It is measured using two numbers: systolic pressure (the pressure when your heart beats) and diastolic pressure (the pressure when your heart rests between beats).</p>
+                
+                <div class="key-facts">
+                    <div class="fact-item">
+                        <i class='bx bx-check-circle fact-icon'></i>
+                        <div class="fact-content">
+                            <h3>The Silent Killer</h3>
+                            <p>High blood pressure is often called the "silent killer" because it usually has no symptoms but can lead to serious health problems like heart attack, stroke, and kidney failure.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="fact-item">
+                        <i class='bx bx-check-circle fact-icon'></i>
+                        <div class="fact-content">
+                            <h3>Widespread Problem</h3>
+                            <p>Nearly half of American adults have high blood pressure, but many don't know they have it because there are often no warning signs or symptoms.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="fact-item">
+                        <i class='bx bx-check-circle fact-icon'></i>
+                        <div class="fact-content">
+                            <h3>Controllable Risk Factor</h3>
+                            <p>Blood pressure is one of the most controllable risk factors for heart disease. Small changes in lifestyle and medication (when needed) can significantly reduce your risk.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bp-classification">
+                    <h3>Blood Pressure Categories</h3>
+                    <p>Understanding your blood pressure numbers is an important part of taking care of your health. Here's how blood pressure is classified according to the American Heart Association:</p>
+                    
+                    <table class="bp-table">
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>Systolic (mm Hg)</th>
+                                <th>Diastolic (mm Hg)</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Normal</td>
+                                <td>Less than 120</td>
+                                <td>and Less than 80</td>
+                                <td><span class="bp-category normal">Normal</span></td>
+                            </tr>
+                            <tr>
+                                <td>Elevated</td>
+                                <td>120-129</td>
+                                <td>and Less than 80</td>
+                                <td><span class="bp-category elevated">At Risk</span></td>
+                            </tr>
+                            <tr>
+                                <td>High Blood Pressure (Stage 1)</td>
+                                <td>130-139</td>
+                                <td>or 80-89</td>
+                                <td><span class="bp-category stage-1">Take Action</span></td>
+                            </tr>
+                            <tr>
+                                <td>High Blood Pressure (Stage 2)</td>
+                                <td>140 or higher</td>
+                                <td>or 90 or higher</td>
+                                <td><span class="bp-category stage-2">Seek Treatment</span></td>
+                            </tr>
+                            <tr>
+                                <td>Hypertensive Crisis</td>
+                                <td>Higher than 180</td>
+                                <td>and/or Higher than 120</td>
+                                <td><span class="bp-category crisis">Emergency</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="slider-container">
+                    <div class="slider">
+                        <div class="slide">
+                            <img src="https://images.pexels.com/photos/7089401/pexels-photo-7089401.jpeg" alt="Blood Pressure Basics">
+                            <div class="slide-content">
+                                <h3>Understanding Your Numbers</h3>
+                                <p>Your blood pressure reading has two numbers. The top number (systolic) represents the pressure when your heart beats, while the bottom number (diastolic) represents the pressure when your heart rests.</p>
+                            </div>
+                        </div>
+                        <div class="slide">
+                            <img src="https://images.pexels.com/photos/7088501/pexels-photo-7088501.jpeg" alt="Home Monitoring">
+                            <div class="slide-content">
+                                <h3>Home Blood Pressure Monitoring</h3>
+                                <p>Regular monitoring at home provides valuable information about your blood pressure trends and how your lifestyle and medications affect your readings.</p>
+                            </div>
+                        </div>
+                        <div class="slide">
+                            <img src="https://images.pexels.com/photos/7088498/pexels-photo-7088498.jpeg" alt="Lifestyle Factors">
+                            <div class="slide-content">
+                                <h3>Lifestyle Factors</h3>
+                                <p>Diet, physical activity, stress, sleep, and certain substances like caffeine and alcohol can all affect your blood pressure readings.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="slider-btn prev-btn"><i class='bx bx-chevron-left'></i></button>
+                    <button class="slider-btn next-btn"><i class='bx bx-chevron-right'></i></button>
+                    <div class="slider-nav">
+                        <div class="slider-dot active"></div>
+                        <div class="slider-dot"></div>
+                        <div class="slider-dot"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="section-header">
+                <h2>Blood Pressure Monitoring Tool</h2>
+            </div>
+            <div class="section-body">
+                <p>Use this simple tool to track your blood pressure readings and get instant feedback on your status based on the American Heart Association guidelines.</p>
+                
+                <div class="tool-container">
+                    <div class="bp-form">
+                        <div class="form-group">
+                            <label for="systolic">Systolic (mm Hg)</label>
+                            <input type="number" id="systolic" placeholder="Top number" min="50" max="250">
+                        </div>
+                        <div class="form-group">
+                            <label for="diastolic">Diastolic (mm Hg)</label>
+                            <input type="number" id="diastolic" placeholder="Bottom number" min="30" max="200">
+                        </div>
+                        <div class="form-group">
+                            <label for="pulse">Pulse (optional)</label>
+                            <input type="number" id="pulse" placeholder="Heart rate">
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button class="btn btn-primary" id="checkBP">Check My Blood Pressure</button>
+                        <button class="btn btn-secondary" id="resetForm">Reset</button>
+                    </div>
+                    
+                    <div id="bpResult" class="bp-result">
+                        <h3>Your Blood Pressure Status</h3>
+                        <p id="bpCategory"></p>
+                        <p id="bpAdvice"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="section-header">
+                <h2>Expert Video Guidance</h2>
+            </div>
+            <div class="section-body">
+                <p>Watch this informative video about properly monitoring your blood pressure at home:</p>
+                <div class="video-container">
+                    <div class="video-responsive">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/gUHALsLeeoM" title="How to Monitor Blood Pressure" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <p>Home blood pressure monitoring can help you track your blood pressure, make certain your medications are working, and alert you and your doctor to potential health complications.</p>
+            </div>
+        </section>
+
+        <section id="monitoring" class="content-section">
+            <div class="section-header">
+                <h2>Blood Pressure Monitoring Methods</h2>
+            </div>
+            <div class="section-body">
+                <p>There are several methods available for monitoring blood pressure. Each has its own advantages and limitations:</p>
+                
+                <div class="methods-grid">
+                    <div class="method-card">
+                        <div class="method-img">
+                            <img src="https://images.pexels.com/photos/7088821/pexels-photo-7088821.jpeg" alt="Digital BP Monitor">
+                        </div>
+                        <div class="method-content">
+                            <h3>Digital Blood Pressure Monitors</h3>
+                            <p>Automated digital devices that measure blood pressure electronically.</p>
+                            <div class="method-pros-cons">
+                                <div class="pros">
+                                    <h4><i class='bx bx-check'></i> Pros</h4>
+                                    <ul>
+                                        <li>Easy to use</li>
+                                        <li>Some store readings</li>
+                                        <li>Digital display</li>
+                                    </ul>
+                                </div>
+                                <div class="cons">
+                                    <h4><i class='bx bx-x'></i> Cons</h4>
+                                    <ul>
+                                        <li>More expensive</li>
+                                        <li>Requires batteries</li>
+                                        <li>Needs calibration</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="method-card">
+                        <div class="method-img">
+                            <img src="https://images.pexels.com/photos/8460370/pexels-photo-8460370.jpeg" alt="Ambulatory BP Monitoring">
+                        </div>
+                        <div class="method-content">
+                            <h3>Ambulatory Blood Pressure Monitoring</h3>
+                            <p>Devices that take readings over a 24-hour period while you go about your normal activities.</p>
+                            <div class="method-pros-cons">
+                                <div class="pros">
+                                    <h4><i class='bx bx-check'></i> Pros</h4>
+                                    <ul>
+                                        <li>Comprehensive data</li>
+                                        <li>Tracks fluctuations</li>
+                                        <li>Detects white coat hypertension</li>
+                                    </ul>
+                                </div>
+                                <div class="cons">
+                                    <h4><i class='bx bx-x'></i> Cons</h4>
+                                    <ul>
+                                        <li>Requires prescription</li>
+                                        <li>Can be uncomfortable</li>
+                                        <li>Not for everyday use</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="method-card">
+                        <div class="method-img">
+                            <img src="https://images.pexels.com/photos/6502313/pexels-photo-6502313.jpeg" alt="Wearable BP Monitors">
+                        </div>
+                        <div class="method-content">
+                            <h3>Wearable Blood Pressure Monitors</h3>
+                            <p>Newer technology that allows for continuous or frequent BP monitoring via smartwatches or special wristbands.</p>
+                            <div class="method-pros-cons">
+                                <div class="pros">
+                                    <h4><i class='bx bx-check'></i> Pros</h4>
+                                    <ul>
+                                        <li>Convenient</li>
+                                        <li>Continuous tracking</li>
+                                        <li>Integration with apps</li>
+                                    </ul>
+                                </div>
+                                <div class="cons">
+                                    <h4><i class='bx bx-x'></i> Cons</h4>
+                                    <ul>
+                                        <li>Less accurate</li>
+                                        <li>Emerging technology</li>
+                                        <li>Battery dependent</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="section-header">
+                <h2>How to Take Your Blood Pressure Correctly</h2>
+            </div>
+            <div class="section-body">
+                <p>Proper technique is crucial for accurate blood pressure readings. Follow these steps each time you measure your blood pressure:</p>
+                
+                <div class="steps-container">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Prepare Properly</h3>
+                            <p>Avoid caffeine, exercise, and smoking for at least 30 minutes before measuring. Empty your bladder and sit quietly for 5 minutes before taking a reading.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Position Yourself Correctly</h3>
+                            <p>Sit in a chair with your back supported and feet flat on the floor. Rest your arm on a table at heart level with your palm facing up.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Apply the Cuff Properly</h3>
+                            <p>Place the cuff on your bare upper arm, not over clothing. The bottom edge should be about one inch above your elbow crease.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step-item">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>Take Multiple Readings</h3>
+                            <p>Take at least two readings, one minute apart. If the readings differ by more than 5 mm Hg, take a third reading and calculate the average.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step-item">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <h3>Record Your Results</h3>
+                            <p>Keep a log of your readings, including date, time, and which arm was used. This information is valuable for your healthcare provider.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="research" class="content-section">
+            <div class="section-header">
+                <h2>Research and Survey Findings</h2>
+            </div>
+            <div class="section-body">
+                <p>Scientific research consistently demonstrates the importance of blood pressure monitoring for heart health. Here are some key findings from recent studies and surveys:</p>
+                
+                <div class="research-card">
+                    <h3>Home Monitoring Effectiveness</h3>
+                    <p>A systematic review of 25 studies published in the Journal of the American Heart Association found that home blood pressure monitoring, when combined with additional support (like educational materials or pharmacist consultation), led to clinically significant reductions in blood pressure compared to usual care.</p>
+                    <p class="research-source">Source: Tucker KL, et al. Self-monitoring of blood pressure in hypertension: A systematic review and individual patient data meta-analysis. PLoS Med, 2017.</p>
+                </div>
+                
+                <div class="research-card">
+                    <h3>Awareness Gap Survey</h3>
+                    <p>According to a 2023 survey conducted by the American Heart Association, while 64% of Americans with high blood pressure know they have the condition, only 38% have it under control. The survey also found that 22% of respondents never check their blood pressure outside of doctor's visits.</p>
+                    <p class="research-source">Source: American Heart Association National Blood Pressure Survey, 2023.</p>
+                </div>
+                
+                <div class="research-card">
+                    <h3>Impact of Regular Monitoring</h3>
+                    <p>The TASMINH4 trial published in The Lancet found that patients who self-monitored their blood pressure and adjusted medication with a pre-approved plan from their doctor achieved better blood pressure control than those receiving usual care. After 12 months, the self-monitoring group had significantly lower systolic blood pressure.</p>
+                    <p class="research-source">Source: McManus RJ, et al. Efficacy of self-monitored blood pressure, with or without telemonitoring, for titration of antihypertensive medication (TASMINH4): an unmasked randomised controlled trial. The Lancet, 2018.</p>
+                </div>
+                
+                <div class="research-card">
+                    <h3>CDC National Survey Findings</h3>
+                    <p>According to data from the Centers for Disease Control and Prevention (CDC), approximately 47% of adults in the United States have hypertension, defined as a systolic blood pressure ≥ 130 mm Hg or a diastolic blood pressure ≥ 80 mm Hg, or are taking medication for hypertension. Of those with hypertension, nearly half (45.6%) are not controlled.</p>
+                    <p class="research-source">Source: Centers for Disease Control and Prevention, National Center for Health Statistics. National Health and Nutrition Examination Survey, 2017-2020.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h4>About HeartHealth</h4>
+                    <p>Dedicated to promoting heart health and preventing cardiovascular disease through education and awareness.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="diet.html">Heart-Healthy Diet</a></li>
+                        <li><a href="physical-activity.html">Physical Activity</a></li>
+                        <li><a href="stress-management.html">Stress Management</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <ul class="footer-links">
+                        <li><i class='bx bx-phone'></i> (123) 456-7890</li>
+                        <li><i class='bx bx-envelope'></i> info@hearthealth.org</li>
+                        <li><i class='bx bx-map'></i> 123 Health Street, Medical District</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 HeartHealth. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Slider functionality
+        const slider = document.querySelector('.slider');
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.slider-dot');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+        let currentSlide = 0;
+        const slideCount = slides.length;
+        
+        function goToSlide(index) {
+            if (index < 0) index = slideCount - 1;
+            if (index >= slideCount) index = 0;
+            
+            slider.style.transform = `translateX(-${index * 100}%)`;
+            currentSlide = index;
+            
+            // Update dots
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentSlide);
+            });
+        }
+        
+        // Set up event listeners
+        prevBtn.addEventListener('click', () => goToSlide(currentSlide - 1));
+        nextBtn.addEventListener('click', () => goToSlide(currentSlide + 1));
+        
+        dots.forEach((dot, i) => {
+            dot.addEventListener('click', () => goToSlide(i));
+        });
+        
+        // Auto-advance slides
+        let slideInterval = setInterval(() => {
+            goToSlide(currentSlide + 1);
+        }, 5000);
+        
+        // Pause auto-advance on hover
+        slider.addEventListener('mouseenter', () => {
+            clearInterval(slideInterval);
+        });
+        
+        slider.addEventListener('mouseleave', () => {
+            slideInterval = setInterval(() => {
+                goToSlide(currentSlide + 1);
+            }, 5000);
+        });
+        
+        // BP Calculator Tool Functionality
+        const systolicInput = document.getElementById('systolic');
+        const diastolicInput = document.getElementById('diastolic');
+        const pulseInput = document.getElementById('pulse');
+        const checkBpBtn = document.getElementById('checkBP');
+        const resetFormBtn = document.getElementById('resetForm');
+        const bpResult = document.getElementById('bpResult');
+        const bpCategory = document.getElementById('bpCategory');
+        const bpAdvice = document.getElementById('bpAdvice');
+        
+        checkBpBtn.addEventListener('click', () => {
+            const systolic = parseInt(systolicInput.value);
+            const diastolic = parseInt(diastolicInput.value);
+            
+            if (!systolic || !diastolic) {
+                alert('Please enter both systolic and diastolic values.');
+                return;
+            }
+            
+            let category, advice, className;
+            
+            // Remove any existing classes
+            bpResult.className = 'bp-result';
+            
+            // Determine BP category based on AHA guidelines
+            if (systolic < 120 && diastolic < 80) {
+                category = "Normal Blood Pressure";
+                advice = "Your blood pressure is considered normal. Continue with a heart-healthy lifestyle, including regular physical activity, a balanced diet, and avoiding tobacco.";
+                className = "normal";
+            } else if (systolic >= 120 && systolic <= 129 && diastolic < 80) {
+                category = "Elevated Blood Pressure";
+                advice = "Your blood pressure is slightly elevated. Consider lifestyle modifications like reducing sodium intake, increasing physical activity, and maintaining a healthy weight.";
+                className = "elevated";
+            } else if ((systolic >= 130 && systolic <= 139) || (diastolic >= 80 && diastolic <= 89)) {
+                category = "High Blood Pressure (Stage 1)";
+                advice = "You have stage 1 hypertension. Consult with your healthcare provider, who may recommend lifestyle changes and possibly medication depending on your overall risk.";
+                className = "stage-1";
+            } else if ((systolic >= 140) || (diastolic >= 90)) {
+                category = "High Blood Pressure (Stage 2)";
+                advice = "You have stage 2 hypertension. Consult with your healthcare provider promptly. You will likely need medication along with lifestyle changes.";
+                className = "stage-2";
+            } else if ((systolic > 180) || (diastolic > 120)) {
+                category = "Hypertensive Crisis!";
+                advice = "This is a hypertensive crisis requiring immediate medical attention. Contact your doctor immediately or go to the emergency room.";
+                className = "crisis";
+            }
+            
+            bpCategory.textContent = `${category} (${systolic}/${diastolic} mm Hg)`;
+            bpAdvice.textContent = advice;
+            
+            bpResult.classList.add(className);
+            bpResult.style.display = 'block';
+        });
+        
+        resetFormBtn.addEventListener('click', () => {
+            systolicInput.value = '';
+            diastolicInput.value = '';
+            pulseInput.value = '';
+            bpResult.style.display = 'none';
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

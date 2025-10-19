@@ -1,0 +1,367 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Heartify - Learn More</title>
+  <meta name="description" content="Heartify: Empower yourself with knowledge. Discover the causes, risks, symptoms and prevention of heart disease." />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap');
+    :root {
+      --primary: #7e69ab;
+      --primary-light: #9b87f5;
+      --accent: #ffd280;
+      --card-glass: rgba(255,255,255,0.15);
+      --card-border: rgba(255,255,255,0.28);
+      --bg-gradient: linear-gradient(120deg, #9b87f5 0%, #7e69ab 75%);
+      --text-main: #fff;
+      --text-heading: #fff;
+      --text-card-heading: #ffd280;
+      --section-shadow: 0 8px 32px rgba(34,20,58,0.12);
+      --section-border: rgba(155,135,245,0.14);
+    }
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg-gradient);
+      color: var(--text-main);
+      min-height: 100vh;
+      scroll-behavior: smooth;
+    }
+    body {
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 0;
+    }
+    .container {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 36px 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+    h1 {
+      font-size: 2.8rem;
+      text-align: center;
+      font-weight: 800;
+      color: var(--text-heading);
+      margin: 18px 0 10px 0;
+      letter-spacing: 0.5px;
+      line-height: 1.1;
+      text-shadow: 0 2px 16px #1115,0 0 1px #fff3;
+      background: linear-gradient(90deg, #ffd280 9%, #fff 65%, #7e69ab 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .subtitle {
+      font-size: 1.2rem;
+      max-width: 560px;
+      text-align: center;
+      color: #fffde7cc;
+      opacity: .9;
+      margin-top: 0;
+      margin-bottom: 34px;
+    }
+    .section-flex-list {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 34px;
+    }
+    .section {
+      background: var(--card-glass);
+      border: 1.5px solid var(--card-border);
+      border-radius: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: stretch;
+      gap: 28px;
+      padding: 28px;
+      box-shadow: var(--section-shadow);
+      margin-bottom: 0;
+      transition: box-shadow 0.22s cubic-bezier(.74,.21,.19,.86), border 0.2s;
+      backdrop-filter: blur(2.5px) saturate(130%);
+      -webkit-backdrop-filter: blur(2.5px) saturate(130%);
+      position: relative;
+      flex-wrap: wrap;
+    }
+    .section:hover, .section:focus-within {
+      box-shadow: 0 12px 34px 7px #8c80be24, 0 0 0 2px var(--primary-light);
+      border-color: #b4a6efcc;
+      z-index: 2;
+    }
+    .section-content {
+      flex: 1 1 230px;
+      min-width: 200px;
+      max-width: 575px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .section-content h2 {
+      font-size: 2rem;
+      color: var(--text-card-heading);
+      font-weight: 700;
+      margin: 0 0 13px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(92deg, #ffd280 44%, #fff 90%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 1px 16px #8b80c55c;
+    }
+    .section-content p {
+      font-size: 1.04rem;
+      font-weight: 400;
+      margin: 0 0 7px 0;
+      color: #f5f3fe!important;
+      text-shadow: 0 2px 5px #23245a23;
+    }
+    .section-content ul {
+      padding-left: 18px;
+      margin: 8px 0 0 0;
+    }
+    .section-content li {
+      margin-bottom: 10px;
+      line-height: 1.58;
+      font-size: 1.02rem;
+      color: #fdf8ff;
+      font-weight: 500;
+      letter-spacing: .01em;
+    }
+    .section-content .highlight, .section-content .highlighted {
+      color: var(--accent);
+      background: none;
+      font-weight: 700;
+    }
+    .photo-frame {
+      flex-shrink: 0;
+      width: 240px;
+      min-width: 220px;
+      max-width: 325px;
+      height: 200px;
+      max-height: 240px;
+      border-radius: 17px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px 1px #49325E2A, 0 1.5px 8px #4a487a08;
+      background: #fff;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1.5px solid #bdaeff44;
+    }
+    .photo-frame img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 15px;
+      transition: transform .33s cubic-bezier(.5,.2,.5,.8);
+    }
+    .section:hover .photo-frame img,
+    .section:focus-within .photo-frame img {
+      transform: scale(1.045) rotate(-1deg);
+    }
+    /* Custom list emoji */
+    .section-content ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .section-content ul li {
+      position: relative;
+      padding-left: 1.6em;
+    }
+    .section-content ul li::before {
+      position: absolute;
+      left: 0;
+      top: 0.11em;
+      content: "•";
+      color: var(--accent);
+      font-size: 1.16em;
+      line-height: 1;
+      font-weight: 900;
+    }
+    /* Responsive */
+    @media (max-width: 960px) {
+      .container {padding: 16px 2vw;}
+      .section {flex-direction: column; gap: 20px; padding: 19px;}
+      .photo-frame {margin: 0 auto;}
+    }
+    @media (max-width: 650px) {
+      h1 {font-size: 2.05rem;}
+      .subtitle {font-size: 1rem;}
+      .section {padding: 14px 7px; border-radius: 18px;}
+      .section-content h2 {font-size: 1.15rem;}
+      .photo-frame {width: 99%; min-width: 0; height: 140px;}
+    }
+    /* Footer */
+    .page-footer {
+      width: 100%;
+      padding: 20px 4vw;
+      margin-top: 44px;
+      text-align: center;
+      background: linear-gradient(92deg,#7e69ab4a 0,#9b87f51c 68%,#fff0 100%);
+      color: #ecdeff80;
+      font-size: .97rem;
+      border-radius: 0 0 16px 16px;
+      box-shadow: 0 3px 24px 1.5px #8a76cc11;
+      letter-spacing: .02em;
+    }
+    .page-footer .brand {
+      color: var(--primary-light);
+      font-weight: 700;
+      letter-spacing: .045em;
+    }
+    .nav-link {
+      margin-left: 10px;
+      color: #ffd280;
+      text-decoration: underline;
+      font-size: .96em;
+      cursor: pointer;
+      transition: color .16s;
+    }
+    .nav-link:hover {color: #fff;}
+    /* Scroll */
+    html::-webkit-scrollbar,
+    body::-webkit-scrollbar {
+      width: 7px;
+      background: #fff0;
+    }
+    html::-webkit-scrollbar-thumb,
+    body::-webkit-scrollbar-thumb {
+      background: #b6a8ed44;
+      border-radius: 7px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Heartify - Learn More</h1>
+    <p class="subtitle">Empower yourself with knowledge. Discover the causes, risks, symptoms and prevention of heart disease—one step closer to a healthier you.</p>
+    <div class="section-flex-list">
+      <div class="section" id="heart-disease">
+        <div class="section-content">
+          <h2>🫀 What is Heart Disease?</h2>
+          <p>
+            Heart disease, also known as cardiovascular disease, refers to a group of conditions that affect the structure and function of the heart. This includes:
+          </p>
+          <ul>
+            <li><strong>Coronary artery disease (CAD):</strong> Narrowing or blockage of the blood vessels that supply the heart muscle.</li>
+            <li><strong>Heart failure:</strong> A condition where the heart cannot pump blood effectively.</li>
+            <li><strong>Arrhythmias:</strong> Abnormal heart rhythms, which can cause the heart to beat too fast, too slow, or irregularly.</li>
+            <li><strong>Valve disease:</strong> Damage or malfunction in one or more of the heart’s valves, affecting blood flow.</li>
+            <li><strong>Congenital heart defects:</strong> Heart problems that are present from birth.</li>
+          </ul>
+        </div>
+        <div class="photo-frame">
+          <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80" alt="Heart Disease"/>
+        </div>
+      </div>
+      <div class="section" id="causes">
+        <div class="section-content">
+          <h2>⚠️ Causes of Heart Disease</h2>
+          <ul>
+            <li><strong>Atherosclerosis:</strong> The buildup of fats, cholesterol, and plaque in artery walls, which restricts blood flow.</li>
+            <li><strong>High blood pressure (hypertension):</strong> Forces the heart to work harder than normal, which can enlarge and weaken it.</li>
+            <li><strong>High cholesterol:</strong> Can lead to plaque buildup in the arteries, reducing or blocking blood flow.</li>
+            <li><strong>Diabetes:</strong> High blood sugar levels damage blood vessels and the nerves that control the heart.</li>
+            <li><strong>Smoking and alcohol:</strong> Nicotine raises blood pressure and damages vessels; excessive alcohol can weaken the heart muscle.</li>
+            <li><strong>Obesity and physical inactivity:</strong> Increase the risk of other conditions like diabetes, high cholesterol, and high blood pressure.</li>
+            <li><strong>Unhealthy diet:</strong> Diets high in saturated fats, trans fats, sugar, and salt contribute to heart disease risk factors.</li>
+            <li><strong>Stress and poor mental health:</strong> Chronic stress can damage arteries and worsen risk factors such as high blood pressure.</li>
+            <li><strong>Genetics/family history:</strong> Having a family history of heart disease increases your risk, especially at a younger age.</li>
+            <li><strong>Infections:</strong> Certain infections like rheumatic fever or viral myocarditis can cause inflammation and damage to the heart.</li>
+          </ul>
+        </div>
+        <div class="photo-frame">
+          <img src="https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?auto=format&fit=crop&w=600&q=80" alt="Causes of Heart Disease"/>
+        </div>
+      </div>
+      <div class="section" id="risk-factors">
+        <div class="section-content">
+          <h2>🔍 Risk Factors</h2>
+          <p class="highlight">There are two types of risk factors:</p>
+          <p><strong>1. Modifiable (you can change them):</strong></p>
+          <ul>
+            <li><strong>Poor diet:</strong> Increases bad cholesterol and blood pressure, and leads to weight gain.</li>
+            <li><strong>Lack of exercise:</strong> Weakens the heart muscle and contributes to obesity and diabetes.</li>
+            <li><strong>Smoking:</strong> Narrows blood vessels, increases clot formation, and lowers oxygen supply to the heart.</li>
+            <li><strong>High blood pressure:</strong> Makes the heart work harder and can lead to thickened arteries.</li>
+            <li><strong>High cholesterol:</strong> Promotes plaque buildup and arterial blockages.</li>
+            <li><strong>Diabetes:</strong> Increases the risk of coronary artery disease due to high blood sugar effects on arteries.</li>
+            <li><strong>Obesity:</strong> Contributes to high cholesterol, diabetes, and high blood pressure — all heart disease risks.</li>
+            <li><strong>Stress:</strong> Long-term stress can increase blood pressure and lead to unhealthy coping habits.</li>
+          </ul>
+          <p><strong>2. Non-modifiable (you can’t change them):</strong></p>
+          <ul>
+            <li><strong>Age:</strong> The risk of heart disease increases as you get older.</li>
+            <li><strong>Gender:</strong> Men are generally at higher risk, though risk rises for women after menopause.</li>
+            <li><strong>Family history:</strong> A history of heart disease in your family can increase your risk.</li>
+            <li><strong>Ethnicity:</strong> Some groups have higher risk due to genetic and lifestyle factors (e.g., South Asians, African Americans).</li>
+          </ul>
+        </div>
+        <div class="photo-frame">
+          <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=600&q=80" alt="Risk Factors"/>
+        </div>
+      </div>
+      <div class="section" id="symptoms">
+        <div class="section-content">
+          <h2>❤️ Symptoms of Heart Disease</h2>
+          <p>The symptoms of heart disease can vary depending on the type, but common signs include:</p>
+          <ul>
+            <li><strong>Chest pain or discomfort (angina):</strong> Often feels like pressure, squeezing, or fullness in the chest.</li>
+            <li><strong>Shortness of breath:</strong> May occur with exertion or even at rest due to poor heart function.</li>
+            <li><strong>Fatigue or weakness:</strong> Especially during physical activity, as the heart fails to deliver enough oxygen.</li>
+            <li><strong>Palpitations:</strong> A sensation of a racing or irregular heartbeat.</li>
+            <li><strong>Swelling in legs or ankles:</strong> Caused by fluid buildup when the heart doesn’t pump effectively.</li>
+            <li><strong>Dizziness or fainting:</strong> Can be a sign of arrhythmias or low blood pressure.</li>
+            <li><strong>Pain in arms, neck, jaw, or back:</strong> Especially in women, heart-related pain may radiate to other parts of the body.</li>
+          </ul>
+        </div>
+        <div class="photo-frame">
+          <img src="https://images.unsplash.com/photo-1458668383970-8ddd3927deed?auto=format&fit=crop&w=600&q=80" alt="Symptoms"/>
+        </div>
+      </div>
+      <div class="section" id="prevention">
+        <div class="section-content">
+          <h2>🛡️ Prevention of Heart Disease</h2>
+          <p>Heart disease can often be prevented by making simple lifestyle changes. Key preventive steps include:</p>
+          <ul>
+            <li><strong>Eat a heart-healthy diet:</strong> Focus on fruits, vegetables, whole grains, lean proteins, and healthy fats. Limit sugar, salt, and processed foods.</li>
+            <li><strong>Stay physically active:</strong> Aim for at least 30 minutes of moderate exercise (like walking, cycling, or swimming) most days of the week.</li>
+            <li><strong>Quit smoking:</strong> Stopping smoking significantly lowers the risk of heart disease within just a few years.</li>
+            <li><strong>Control blood pressure and cholesterol:</strong> Monitor regularly and take medications if prescribed by your doctor.</li>
+            <li><strong>Manage diabetes:</strong> Keep blood sugar levels within the target range through diet, exercise, and medications if needed.</li>
+            <li><strong>Maintain a healthy weight:</strong> Even small weight loss can reduce risk factors like high blood pressure and cholesterol.</li>
+            <li><strong>Reduce stress:</strong> Try yoga, meditation, deep breathing, or talking to someone to manage chronic stress.</li>
+            <li><strong>Limit alcohol:</strong> If you drink, do so in moderation (1 drink per day for women, 2 for men).</li>
+          </ul>
+        </div>
+        <div class="photo-frame">
+          <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=600&q=80" alt="Prevention"/>
+        </div>
+      </div>
+    </div>
+    <footer class="page-footer">
+      <p>
+        <span class="brand">Heartify</span> &copy; <span id="year"></span> · For educational purposes only
+        <a href="#heart-disease" class="nav-link">Back to top</a>
+      </p>
+    </footer>
+  </div>
+  <script>
+    document.getElementById('year').textContent = String(new Date().getFullYear());
+  </script>
+</body>
+</html>

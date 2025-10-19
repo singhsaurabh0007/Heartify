@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Heartify</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background: #0d1930;
+            color: #ffffff;
+            overflow-x: hidden;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar {
+            background-color: rgba(13, 25, 48, 0.95);
+            backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2.5rem;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            box-sizing: border-box;
+        }
+
+        .app-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .menu-logo {
+            font-size: 1.75rem;
+            color: #ffffff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .app-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+
+        .menu-logo:hover, .app-name:hover {
+            color: #60a5fa;
+            transform: translateY(-1px);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.625rem 0.75rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            white-space: nowrap;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: #60a5fa;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-links a:hover::after {
+            width: 80%;
+        }
+
+        .nav-links a:hover {
+            color: #60a5fa;
+            transform: translateY(-1px);
+        }
+
+        /* Mobile menu button */
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.75rem;
+            color: #ffffff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        /* Login form styles */
+        .login-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 70px;
+            padding: 2rem;
+        }
+
+        .login-box {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            padding: 2.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            width: 100%;
+            max-width: 430px;
+            text-align: center;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .login-box h1 {
+            color: #60a5fa;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+        .login-box p {
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 0.5rem;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #60a5fa;
+            box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.3);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 0.875rem;
+            background: #60a5fa;
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .login-btn:hover {
+            background: #3b82f6;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
+        .forgot-password {
+            display: block;
+            margin-top: 1rem;
+            color: #60a5fa;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .forgot-password:hover {
+            color: #93c5fd;
+            text-decoration: underline;
+        }
+
+        .register-link {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .register-link p {
+            margin-bottom: 0.5rem;
+        }
+
+        .register-link a {
+            color: #60a5fa;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .register-link a:hover {
+            color: #93c5fd;
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: #f87171;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        .home-link {
+            display: inline-block;
+            margin-top: 1.5rem;
+            color: #ffffff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .home-link:hover {
+            color: #60a5fa;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(13, 25, 48, 0.95);
+            backdrop-filter: blur(8px);
+            color: #ffffff;
+            padding: 1.5rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #60a5fa, #3b82f6, #2563eb);
+        }
+
+        /* Sidebar Menu */
+        #sidebar-menu {
+            position: fixed;
+            top: 0;
+            left: -280px;
+            width: 280px;
+            height: 100vh;
+            background: rgba(13, 25, 48, 0.98);
+            backdrop-filter: blur(12px);
+            padding-top: 5rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 999;
+            box-shadow: 4px 0 25px rgba(0, 0, 0, 0.2);
+        }
+
+        #sidebar-menu.active {
+            left: 0;
+        }
+
+        #sidebar-menu a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+
+        #sidebar-menu a:hover {
+            background: rgba(96, 165, 250, 0.1);
+            border-left-color: #60a5fa;
+            padding-left: 2rem;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 1.75rem;
+            color: #ffffff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            color: #60a5fa;
+            transform: rotate(90deg);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .login-box {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .app-header {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .login-box {
+                padding: 1.5rem;
+            }
+            
+            .login-box h1 {
+                font-size: 1.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="app-header">
+            <span class="menu-logo">☰</span>
+            <a href="index.html" class="app-name">Heartify</a>
+        </div>
+        <div class="nav-links">
+            <a href="menu_content.html#heart-disease">Heart Disease</a>
+            <a href="menu_content.html#symptoms">Symptoms</a>
+            <a href="prevention.html">Prevention</a>
+            <a href="types.html">Types</a>
+            <a href="cardiologist.html">Cardiologists</a>
+            <a href="success_stories.html">Success Stories</a>
+            <a href="research.html">Research & Development</a>
+            <a href="user_interface2.html">Try Heartify</a>
+        </div>
+        <div class="mobile-menu-btn">☰</div>
+    </div>
+
+    <div class="login-container">
+        <div class="login-box">
+            <h1>Welcome Back</h1>
+            <p>Sign in to access personalized heart health insights and track your progress.</p>
+            
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" class="form-control" placeholder="Enter your password" required>
+                    <div id="error-message" class="error-message">Invalid email or password. Please try again.</div>
+                </div>
+                
+                <button type="submit" class="login-btn">Sign In</button>
+                <a href="#" class="forgot-password">Forgot password?</a>
+            </form>
+            
+            <div class="register-link">
+                <p>Don't have an account?</p>
+                <a href="#">Create an account</a>
+            </div>
+            
+            <a href="index.html" class="home-link">← Back to Home</a>
+        </div>
+    </div>
+
+    <div id="sidebar-menu">
+        <span class="close-btn" id="close-sidebar">&times;</span>
+        <a href="menu_content.html#heart-disease">🫀 Heart Disease</a>
+        <a href="menu_content.html#causes">⚠️ Causes</a>
+        <a href="menu_content.html#risk-factors">🔍 Risk Factors</a>
+        <a href="menu_content.html#symptoms">❤️ Symptoms</a>
+        <a href="prevention.html">🛡️ Prevention</a>
+        <a href="types.html">❤️ Types of Heart Diseases</a>
+        <a href="cardiologist.html">👨‍⚕️ Cardiologists</a>
+        <a href="cardiologist.html#Top-Hospitals">🏥 Top Hospitals</a>
+        <a href="success_stories.html">✨ Success Stories</a>
+        <a href="research.html">🔬 Research & Development</a>
+        <a href="user_interface2.html">📊 Try Heartify</a>
+        <a href="login.html" id="sidebar-login">🔐 Login</a>
+    </div>
+
+    <footer>
+        <p>Heartify © 2025. All rights reserved.</p>
+    </footer>
+
+    <script>
+        $(document).ready(function() {
+            // Check if user is already logged in
+            if (localStorage.getItem('heartifyLoggedIn') === 'true') {
+                window.location.href = 'index.html';
+            }
+            
+            // Handle login form submission
+            $('#login-form').submit(function(e) {
+                e.preventDefault();
+                
+                const email = $('#email').val();
+                const password = $('#password').val();
+                
+                // Simple validation
+                if (email && password) {
+                    // For demo purposes, accept any login
+                    localStorage.setItem('heartifyLoggedIn', 'true');
+                    
+                    // Store username (from email)
+                    const username = email.split('@')[0];
+                    localStorage.setItem('heartifyUsername', username);
+                    
+                    // Redirect to home page
+                    window.location.href = 'index.html';
+                } else {
+                    $('#error-message').show();
+                }
+            });
+            
+            // Navigation and sidebar functionality
+            $(".mobile-menu-btn").click(function(e) {
+                e.stopPropagation();
+                $("#sidebar-menu").addClass("active");
+            });
+            
+            $(".menu-logo").click(function(e) {
+                e.stopPropagation();
+                $("#sidebar-menu").addClass("active");
+            });
+
+            $("#close-sidebar").click(function() {
+                $("#sidebar-menu").removeClass("active");
+            });
+                 
+            $(document).click(function(e) {
+                if (
+                    !$(e.target).closest("#sidebar-menu").length &&
+                    !$(e.target).closest(".menu-logo").length &&
+                    !$(e.target).closest(".mobile-menu-btn").length
+                ) {
+                    $("#sidebar-menu").removeClass("active");
+                }
+            });
+        });
+    </script>
+</body>
+</html>

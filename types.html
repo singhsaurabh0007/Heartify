@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heartify - Heart Disease Information</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(to bottom, #f0f9ff, #ffffff);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(to right, #0c4a6e, #075985, #0c4a6e);
+            color: white;
+            padding: 3rem 2rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .header-content {
+            max-width: 800px;
+        }
+            
+        .header-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .header-description {
+            color: #e0f2fe;
+            font-size: 1.1rem;
+            max-width: 600px;
+        }
+
+        .main-content {
+            padding: 4rem 2rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: #0c4a6e;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-description {
+            color: #334155;
+            max-width: 800px;
+            margin-bottom: 3rem;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .disease-card {
+            background: white;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .disease-card:hover {
+            transform: translateY(-4px) scale(1.01);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .disease-card:hover .card-image img {
+            transform: scale(1.05);
+        }
+
+        .card-content {
+            padding: 1.5rem;
+            background: linear-gradient(to bottom right, #f0f9ff, #e0f2fe);
+        }
+
+        .card-title {
+            color: #0c4a6e;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .card-details {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .detail-label {
+            color: #0369a1;
+            font-weight: 600;
+        }
+
+        .detail-value {
+            color: #334155;
+        }
+
+        @media (max-width: 768px) {
+            .header-title {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.75rem;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1 class="header-title">Heartify</h1>
+                <p class="header-description">
+                    Your comprehensive guide to understanding heart diseases, prevention methods, and treatment options.
+                    Knowledge is the first step toward heart health.
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <h2 class="section-title">Types of Heart Disease</h2>
+            <p class="section-description">
+                Understanding the different types of heart disease is crucial for early detection and 
+                proper treatment. Each type affects the heart in unique ways and may require specialized care.
+            </p>
+
+            <div class="cards-grid">
+                <div class="disease-card">
+                    <div class="card-image">
+                        <img src="https://images.pexels.com/photos/4386467/pexels-photo-4386467.jpeg" alt="Coronary Artery Disease">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Coronary Artery Disease (CAD)</h3>
+                        <p class="card-description">Caused by plaque buildup in the coronary arteries. Often results in chest pain or heart attack.</p>
+                        <div class="card-details">
+                            <p><span class="detail-label">Specialist:</span> <span class="detail-value">Cardiologist</span></p>
+                            <p><span class="detail-label">Recommended Hospital:</span> <span class="detail-value">Mayo Clinic or Cleveland Clinic</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="disease-card">
+                    <div class="card-image">
+                        <img src="https://images.pexels.com/photos/7659564/pexels-photo-7659564.jpeg" alt="Heart Failure">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Heart Failure</h3>
+                        <p class="card-description">The heart is unable to pump blood effectively, leading to fluid buildup and fatigue.</p>
+                        <div class="card-details">
+                            <p><span class="detail-label">Specialist:</span> <span class="detail-value">Heart Failure Specialist</span></p>
+                            <p><span class="detail-label">Recommended Hospital:</span> <span class="detail-value">Mount Sinai Heart</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="disease-card">
+                    <div class="card-image">
+                        <img src="https://images.pexels.com/photos/7722167/pexels-photo-7722167.jpeg" alt="Arrhythmias">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Arrhythmias</h3>
+                        <p class="card-description">Irregular heartbeats due to electrical signal issues.</p>
+                        <div class="card-details">
+                            <p><span class="detail-label">Specialist:</span> <span class="detail-value">Electrophysiologist</span></p>
+                            <p><span class="detail-label">Recommended Hospital:</span> <span class="detail-value">Johns Hopkins Hospital</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="disease-card">
+                    <div class="card-image">
+                        <img src="https://images.pexels.com/photos/5452201/pexels-photo-5452201.jpeg" alt="Valvular Heart Disease">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Valvular Heart Disease</h3>
+                        <p class="card-description">Damage or malfunction of heart valves, leading to blood flow problems.</p>
+                        <div class="card-details">
+                            <p><span class="detail-label">Specialist:</span> <span class="detail-value">Cardiothoracic Surgeon</span></p>
+                            <p><span class="detail-label">Recommended Hospital:</span> <span class="detail-value">Cleveland Clinic</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="disease-card">
+                    <div class="card-image">
+                        <img src="https://images.pexels.com/photos/8460158/pexels-photo-8460158.jpeg" alt="Congenital Heart Defects">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Congenital Heart Defects</h3>
+                        <p class="card-description">Heart abnormalities present at birth. May need surgery or intervention.</p>
+                        <div class="card-details">
+                            <p><span class="detail-label">Specialist:</span> <span class="detail-value">Pediatric Cardiologist</span></p>
+                            <p><span class="detail-label">Recommended Hospital:</span> <span class="detail-value">Boston Children's Hospital</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="disease-card">
+                    <div class="card-image">
+                        <img src="https://images.pexels.com/photos/5938358/pexels-photo-5938358.jpeg" alt="Cardiomyopathy">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Cardiomyopathy</h3>
+                        <p class="card-description">Disease of the heart muscle that affects its ability to pump blood.</p>
+                        <div class="card-details">
+                            <p><span class="detail-label">Specialist:</span> <span class="detail-value">Cardiologist</span></p>
+                            <p><span class="detail-label">Recommended Hospital:</span> <span class="detail-value">Mayo Clinic</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="disease-card">
+                    <div class="card-image">
+                        <img src="https://images.pexels.com/photos/6502313/pexels-photo-6502313.jpeg" alt="Pericarditis">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Pericarditis</h3>
+                        <p class="card-description">Inflammation of the pericardium, often due to infection or autoimmune disorders.</p>
+                        <div class="card-details">
+                            <p><span class="detail-label">Specialist:</span> <span class="detail-value">Cardiologist or Rheumatologist</span></p>
+                            <p><span class="detail-label">Recommended Hospital:</span> <span class="detail-value">UCLA Medical Center</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="disease-card">
+                    <div class="card-image">
+                        <img src="https://images.pexels.com/photos/5699516/pexels-photo-5699516.jpeg" alt="Rheumatic Heart Disease">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Rheumatic Heart Disease</h3>
+                        <p class="card-description">Damage to heart valves from rheumatic fever, a complication of untreated strep throat.</p>
+                        <div class="card-details">
+                            <p><span class="detail-label">Specialist:</span> <span class="detail-value">Infectious Disease Specialist & Cardiologist</span></p>
+                            <p><span class="detail-label">Recommended Hospital:</span> <span class="detail-value">Apollo Hospitals (India)</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

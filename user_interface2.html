@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Disease Prediction</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #1a73e8;
+            --primary-light: #4285f4;
+            --primary-dark: #0d47a1;
+            --accent-color: #e53935;
+            --accent-light: #ff6f60;
+            --accent-dark: #ab000d;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-dark: #202124;
+            --text-medium: #5f6368;
+            --text-light: #80868b;
+            --border-color: #dadce0;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --success-color: #34a853;
+            --warning-color: #fbbc05;
+            --error-color: #ea4335;
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 32px;
+            --space-xxl: 48px;
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 16px;
+            --transition-fast: 0.15s ease;
+            --transition-normal: 0.25s ease;
+            --transition-slow: 0.4s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.5;
+            color: var(--text-dark);
+            background-color: var(--bg-color);
+            background-image: url('https://images.pexels.com/photos/4386466/pexels-photo-4386466.jpeg?auto=compress&cs=tinysrgb&w=1920');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.9);
+            z-index: -1;
+        }
+
+        .page-container {
+            min-height: 100vh;
+            padding: var(--space-md);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 8px 30px var(--shadow-color);
+            overflow: hidden;
+            transition: transform var(--transition-normal);
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            color: white;
+            padding: var(--space-xl) var(--space-lg);
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: var(--space-sm);
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.85;
+        }
+
+        form {
+            padding: var(--space-lg);
+        }
+
+        .form-sections {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-xl);
+        }
+
+        .form-section {
+            background-color: rgba(240, 242, 245, 0.5);
+            border-radius: var(--radius-md);
+            padding: var(--space-lg);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+        }
+
+        .form-section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .form-section h3 {
+            font-size: 1.3rem;
+            color: var(--primary-dark);
+            margin-bottom: var(--space-lg);
+            padding-bottom: var(--space-xs);
+            border-bottom: 2px solid var(--primary-light);
+        }
+
+        .form-group {
+            margin-bottom: var(--space-md);
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: var(--space-xs);
+            color: var(--text-dark);
+        }
+
+        .radio-group {
+            display: flex;
+            gap: var(--space-md);
+        }
+
+        .radio-label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            font-weight: normal;
+            position: relative;
+        }
+
+        .radio-label input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+
+        .radio-text {
+            position: relative;
+            padding: var(--space-xs) var(--space-md);
+            background-color: white;
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            transition: all var(--transition-fast);
+        }
+
+        .radio-label input[type="radio"]:checked + .radio-text {
+            background-color: var(--primary-light);
+            color: white;
+            border-color: var(--primary-dark);
+        }
+
+        .radio-label:hover .radio-text {
+            border-color: var(--primary-color);
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: var(--space-sm) var(--space-md);
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            font-size: 1rem;
+            transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+            appearance: textfield;
+        }
+
+        input[type="number"]:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.2);
+        }
+
+        .input-helper {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-medium);
+            margin-top: var(--space-xs);
+        }
+
+        .form-actions {
+            margin-top: var(--space-xl);
+            display: flex;
+            justify-content: center;
+        }
+
+        .predict-button {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            padding: var(--space-md) var(--space-xl);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(26, 115, 232, 0.3);
+            transition: all var(--transition-normal);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .predict-button:hover {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+            box-shadow: 0 6px 15px rgba(26, 115, 232, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .predict-button:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 5px rgba(26, 115, 232, 0.3);
+        }
+
+        .predict-button span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .predict-button::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 10px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(1);
+            transition: width 0.6s ease-out, height 0.6s ease-out, opacity 0.6s ease-out;
+        }
+
+        .predict-button:hover::after {
+            width: 300px;
+            height: 300px;
+            opacity: 1;
+        }
+
+        .result-container {
+            padding: 0 var(--space-lg) var(--space-xl);
+        }
+
+        .result-box {
+            background: linear-gradient(to right, #f4f7f9, #e8f0fe);
+            border-radius: var(--radius-md);
+            padding: var(--space-lg);
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: all var(--transition-normal);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .result-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary-light), var(--accent-light));
+        }
+
+        .result-box h3 {
+            color: var(--primary-dark);
+            margin-bottom: var(--space-md);
+        }
+
+        .result-content {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            padding: var(--space-md);
+            background-color: white;
+            border-radius: var(--radius-sm);
+            display: inline-block;
+            min-width: 200px;
+        }
+
+        .loading {
+            position: relative;
+            color: var(--text-medium);
+        }
+        
+        .loading:after {
+            content: '';
+            animation: dots 1.5s infinite;
+        }
+        
+        @keyframes dots {
+            0%, 20% {
+                content: '.';
+            }
+            40% {
+                content: '..';
+            }
+            60%, 100% {
+                content: '...';
+            }
+        }
+        
+        .processing {
+            opacity: 0.8;
+            pointer-events: none;
+        }
+        
+        .highlight {
+            animation: highlight 1s ease-in-out;
+        }
+        
+        @keyframes highlight {
+            0%, 100% {
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            }
+            50% {
+                box-shadow: 0 4px 25px rgba(26, 115, 232, 0.3);
+            }
+        }
+        
+        .high-risk {
+            color: var(--error-color);
+            font-weight: bold;
+        }
+        
+        .low-risk {
+            color: var(--success-color);
+            font-weight: bold;
+        }
+        
+        .neutral {
+            color: var(--text-dark);
+        }
+        
+        .error {
+            color: var(--error-color);
+        }
+        
+        input[type="number"].active {
+            background-color: rgba(26, 115, 232, 0.05);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                border-radius: var(--radius-md);
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            form {
+                padding: var(--space-md);
+            }
+            
+            .form-sections {
+                grid-template-columns: 1fr;
+                gap: var(--space-lg);
+            }
+            
+            .form-section {
+                padding: var(--space-md);
+            }
+            
+            .radio-group {
+                gap: var(--space-sm);
+            }
+            
+            .result-container {
+                padding: 0 var(--space-md) var(--space-lg);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-container {
+                padding: var(--space-xs);
+            }
+            
+            .container {
+                border-radius: var(--radius-sm);
+            }
+            
+            .header {
+                padding: var(--space-lg) var(--space-md);
+            }
+            
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .radio-text {
+                padding: var(--space-xs) var(--space-sm);
+                font-size: 0.9rem;
+            }
+            
+            .form-section h3 {
+                font-size: 1.1rem;
+            }
+            
+            .predict-button {
+                width: 100%;
+                padding: var(--space-sm) var(--space-md);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <div class="container">
+            <div class="header">
+                <h1>Heart Disease Risk Assessment</h1>
+                <p class="subtitle">Fill in your health information below for a prediction</p>
+            </div>
+            
+            <form id="predictionForm">
+                <div class="form-sections">
+                    <div class="form-section">
+                        <h3>Medical Conditions</h3>
+                        
+                        <div class="form-group">
+                            <label>High Blood Pressure:</label>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="HighBP" value="1" required>
+                                    <span class="radio-text">Yes</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="HighBP" value="0" required>
+                                    <span class="radio-text">No</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>High Cholesterol:</label>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="HighChol" value="1" required>
+                                    <span class="radio-text">Yes</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="HighChol" value="0" required>
+                                    <span class="radio-text">No</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Cholesterol Check:</label>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="CholCheck" value="1" required>
+                                    <span class="radio-text">Yes</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="CholCheck" value="0" required>
+                                    <span class="radio-text">No</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>BMI:</label>
+                            <input type="number" name="BMI" step="0.1" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Stroke History:</label>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="Stroke" value="1" required>
+                                    <span class="radio-text">Yes</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="Stroke" value="0" required>
+                                    <span class="radio-text">No</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Diabetes:</label>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="Diabetes" value="1" required>
+                                    <span class="radio-text">Yes</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="Diabetes" value="0" required>
+                                    <span class="radio-text">No</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Lifestyle Factors</h3>
+                        
+                        <div class="form-group">
+                            <label>Smoker:</label>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="Smoker" value="1" required>
+                                    <span class="radio-text">Yes</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="Smoker" value="0" required>
+                                    <span class="radio-text">No</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Physical Activity:</label>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="PhysActivity" value="1" required>
+                                    <span class="radio-text">Yes</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="PhysActivity" value="0" required>
+                                    <span class="radio-text">No</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Fruits Intake:</label>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="Fruits" value="1" required>
+                                    <span class="radio-text">Yes</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="Fruits" value="0" required>
+                                    <span class="radio-text">No</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Veggies Intake:</label>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="Veggies" value="1" required>
+                                    <span class="radio-text">Yes</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="Veggies" value="0" required>
+                                    <span class="radio-text">No</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Heavy Alcohol Consumption:</label>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="HvyAlcoholConsump" value="1" required>
+                                    <span class="radio-text">Yes</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="HvyAlcoholConsump" value="0" required>
+                                    <span class="radio-text">No</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Healthcare Access</h3>
+                        
+                        <div class="form-group">
+                            <label>Any Healthcare:</label>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="AnyHealthcare" value="1" required>
+                                    <span class="radio-text">Yes</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="AnyHealthcare" value="0" required>
+                                    <span class="radio-text">No</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>No Doctor Because of Cost:</label>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="NoDocbcCost" value="1" required>
+                                    <span class="radio-text">Yes</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="NoDocbcCost" value="0" required>
+                                    <span class="radio-text">No</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Health Status</h3>
+                        
+                        <div class="form-group">
+                            <label>General Health (1-5):</label>
+                            <input type="number" name="GenHlth" min="1" max="5" required>
+                            <span class="input-helper">1=Excellent, 5=Poor</span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Mental Health:</label>
+                            <input type="number" name="MentHlth" min="0" max="30" required>
+                            <span class="input-helper">Days in Poor Mental Health (0-30)</span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Physical Health:</label>
+                            <input type="number" name="PhysHlth" min="0" max="30" required>
+                            <span class="input-helper">Days in Poor Physical Health (0-30)</span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Difficulty Walking:</label>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="DiffWalk" value="1" required>
+                                    <span class="radio-text">Yes</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="DiffWalk" value="0" required>
+                                    <span class="radio-text">No</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Demographics</h3>
+                        
+                        <div class="form-group">
+                            <label>Age Category (1-13):
+                            <input type="number" name="Age" min="1" max="13" required>
+                            <span class="input-helper">1=18-24, 13=80+</span>
+                        </label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Sex:</label>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="Sex" value="1" required>
+                                    <span class="radio-text">Male</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="Sex" value="0" required>
+                                    <span class="radio-text">Female</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Education Level (1-6):</label>
+                            <input type="number" name="Education" min="1" max="6" required>
+                            <span class="input-helper">1=No school, 6=4+ years college</span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Income Level (1-8):</label>
+                            <input type="number" name="Income" min="1" max="8" required>
+                            <span class="input-helper">1=<$10k, 8=$75k+</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="predict-button">
+                        <span>Predict Risk</span>
+                    </button>
+                </div>
+            </form>
+
+            <div class="result-container">
+                <div class="result-box" id="result-box">
+                    <h3>Prediction Result</h3>
+                    <div class="result-content">
+                        <span id="result">Awaiting prediction...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $("#predictionForm").submit(function(event) {
+                event.preventDefault();
+                let formData = $(this).serializeArray();
+                let formValues = {};
+                formData.forEach(item => {
+                    formValues[item.name] = item.value;
+                });
+                console.log("\ud83d\udccc Submitted Data:", formValues);
+                $.ajax({
+                    url: "/",
+                    type: "POST",
+                    data: $(this).serialize(),
+                    dataType: "json",
+                    headers: { "X-Requested-With": "XMLHttpRequest" },
+                    success: function(response) {
+                        console.log("\u2705 Prediction Result:", response.result);
+                        $("#result").text(response.result);
+                    },
+                    error: function(xhr) {
+                        console.error("\u274c Error:", xhr.responseText);
+                        $("#result").text("Error: " + xhr.responseText);
+                    }
+                });
+            });
+        });
+        </script>
+</body>
+</html>

@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Cardiologists & Hospitals - HeartHealth</title>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e40af;
+            --primary-light: #3b82f6;
+            --secondary: #475569;
+            --background: #f0f9ff;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background: var(--background);
+            color: var(--secondary);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .header p {
+            color: var(--secondary);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: var(--primary);
+            text-align: center;
+            margin: 3rem 0 2rem;
+        }
+
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .card-subtitle {
+            color: var(--primary-light);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .card-info {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-info i {
+            color: var(--primary-light);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: #e0f2fe;
+            color: var(--primary);
+            border-radius: 15px;
+            font-size: 0.875rem;
+            margin-top: 1rem;
+        }
+
+        .contact-button {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: var(--primary);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .contact-button:hover {
+            background: var(--primary-light);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            .cards-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>Top Cardiologists & Hospitals in India</h1>
+        <p>Find the best cardiac care professionals and facilities across India</p>
+    </header>
+
+    <h2 class="section-title">Leading Cardiologists</h2>
+    <div class="cards-container">
+        <!-- Cardiologist Card 1 -->
+        <div class="card">
+            <img src="https://images.pexels.com/photos/4173251/pexels-photo-4173251.jpeg" alt="Dr. Naresh Trehan" class="card-image">
+            <div class="card-content">
+                <h3 class="card-title">Dr. Naresh Trehan</h3>
+                <p class="card-subtitle">Chairman & Managing Director, Medanta</p>
+                <div class="card-info"><i class='bx bx-money'></i><span>Consultation: ₹2,500</span></div>
+                <div class="card-info"><i class='bx bx-time'></i><span>Experience: 40+ years</span></div>
+                <div class="card-info"><i class='bx bx-map'></i><span>Gurugram, Haryana</span></div>
+                <span class="badge">Padma Bhushan Awardee</span><br>
+                <a href="tel:+911244141414" class="contact-button">Book Appointment</a>
+            </div>
+        </div>
+    
+        <!-- Cardiologist Card 2 -->
+        <div class="card">
+            <img src="https://images.pexels.com/photos/8460063/pexels-photo-8460063.jpeg" alt="Dr. Devi Prasad Shetty" class="card-image">
+            <div class="card-content">
+                <h3 class="card-title">Dr. Devi Prasad Shetty</h3>
+                <p class="card-subtitle">Founder, Narayana Health</p>
+                <div class="card-info"><i class='bx bx-money'></i><span>Consultation: ₹1,500</span></div>
+                <div class="card-info"><i class='bx bx-time'></i><span>Experience: 35+ years</span></div>
+                <div class="card-info"><i class='bx bx-map'></i><span>Bangalore, Karnataka</span></div>
+                <span class="badge">Padma Bhushan Awardee</span><br>
+                <a href="tel:+918066444444" class="contact-button">Book Appointment</a>
+            </div>
+        </div>
+    
+        <!-- Cardiologist Card 3 -->
+        <div class="card">
+            <img src="https://images.pexels.com/photos/7611040/pexels-photo-7611040.jpeg" alt="Dr. Ashok Seth" class="card-image">
+            <div class="card-content">
+                <h3 class="card-title">Dr. Ashok Seth</h3>
+                <p class="card-subtitle">Chairman, Fortis Escorts Heart Institute</p>
+                <div class="card-info"><i class='bx bx-money'></i><span>Consultation: ₹2,000</span></div>
+                <div class="card-info"><i class='bx bx-time'></i><span>Experience: 38+ years</span></div>
+                <div class="card-info"><i class='bx bx-map'></i><span>New Delhi</span></div>
+                <span class="badge">Padma Bhushan Awardee</span><br>
+                <a href="tel:+911126887888" class="contact-button">Book Appointment</a>
+            </div>
+        </div>
+    
+        <!-- Cardiologist Card 4 -->
+        <div class="card">
+            <img src="https://images.pexels.com/photos/8460158/pexels-photo-8460158.jpeg" alt="Dr. KM Cherian" class="card-image">
+            <div class="card-content">
+                <h3 class="card-title">Dr. KM Cherian</h3>
+                <p class="card-subtitle">Founder, Frontier Lifeline Hospital</p>
+                <div class="card-info"><i class='bx bx-money'></i><span>Consultation: ₹2,200</span></div>
+                <div class="card-info"><i class='bx bx-time'></i><span>Experience: 50+ years</span></div>
+                <div class="card-info"><i class='bx bx-map'></i><span>Chennai, Tamil Nadu</span></div>
+                <span class="badge">Pioneer in Pediatric Cardiac Surgery</span><br>
+                <a href="tel:+914426440000" class="contact-button">Book Appointment</a>
+            </div>
+        </div>
+    
+        <!-- Cardiologist Card 5 -->
+        <div class="card">
+            <img src="https://images.pexels.com/photos/8376293/pexels-photo-8376293.jpeg" alt="Dr. Ramakanta Panda" class="card-image">
+            <div class="card-content">
+                <h3 class="card-title">Dr. Ramakanta Panda</h3>
+                <p class="card-subtitle">Vice Chairman, Asian Heart Institute</p>
+                <div class="card-info"><i class='bx bx-money'></i><span>Consultation: ₹3,000</span></div>
+                <div class="card-info"><i class='bx bx-time'></i><span>Experience: 35+ years</span></div>
+                <div class="card-info"><i class='bx bx-map'></i><span>Mumbai, Maharashtra</span></div>
+                <span class="badge">Padma Bhushan Awardee</span><br>
+                <a href="tel:+912266666666" class="contact-button">Book Appointment</a>
+            </div>
+        </div>
+    
+        <!-- Cardiologist Card 6 -->
+        <div class="card">
+            <img src="https://images.pexels.com/photos/8460153/pexels-photo-8460153.jpeg" alt="Dr. Upendra Kaul" class="card-image">
+            <div class="card-content">
+                <h3 class="card-title">Dr. Upendra Kaul</h3>
+                <p class="card-subtitle">Chairman, Batra Heart Centre</p>
+                <div class="card-info"><i class='bx bx-money'></i><span>Consultation: ₹1,800</span></div>
+                <div class="card-info"><i class='bx bx-time'></i><span>Experience: 40+ years</span></div>
+                <div class="card-info"><i class='bx bx-map'></i><span>New Delhi</span></div>
+                <span class="badge">Renowned Interventional Cardiologist</span><br>
+                <a href="tel:+911129921888" class="contact-button">Book Appointment</a>
+            </div>
+        </div>
+    
+        <!-- Cardiologist Card 7 -->
+        <div class="card">
+            <img src="https://images.pexels.com/photos/8376318/pexels-photo-8376318.jpeg" alt="Dr. T.S. Kler" class="card-image">
+            <div class="card-content">
+                <h3 class="card-title">Dr. T.S. Kler</h3>
+                <p class="card-subtitle">Chairman, PSRI Heart Institute</p>
+                <div class="card-info"><i class='bx bx-money'></i><span>Consultation: ₹2,000</span></div>
+                <div class="card-info"><i class='bx bx-time'></i><span>Experience: 35+ years</span></div>
+                <div class="card-info"><i class='bx bx-map'></i><span>New Delhi</span></div>
+                <span class="badge">Expert in Cardiac Electrophysiology</span><br>
+                <a href="tel:+911126616111" class="contact-button">Book Appointment</a>
+            </div>
+        </div>
+    
+        <!-- Cardiologist Card 8 -->
+        <div class="card">
+            <img src="https://images.pexels.com/photos/8460060/pexels-photo-8460060.jpeg" alt="Dr. Balbir Singh" class="card-image">
+            <div class="card-content">
+                <h3 class="card-title">Dr. Balbir Singh</h3>
+                <p class="card-subtitle">Chairman, Cardiology, Max Hospital</p>
+                <div class="card-info"><i class='bx bx-money'></i><span>Consultation: ₹2,300</span></div>
+                <div class="card-info"><i class='bx bx-time'></i><span>Experience: 30+ years</span></div>
+                <div class="card-info"><i class='bx bx-map'></i><span>Saket, New Delhi</span></div>
+                <span class="badge">Pioneer in Electrophysiology</span><br>
+                <a href="tel:+911130880000" class="contact-button">Book Appointment</a>
+            </div>
+        </div>
+    
+        <!-- Cardiologist Card 9 -->
+        <div class="card">
+            <img src="https://images.pexels.com/photos/8460160/pexels-photo-8460160.jpeg" alt="Dr. Suman Bhandari" class="card-image">
+            <div class="card-content">
+                <h3 class="card-title">Dr. Suman Bhandari</h3>
+                <p class="card-subtitle">Senior Consultant, Heart Institute</p>
+                <div class="card-info"><i class='bx bx-money'></i><span>Consultation: ₹1,700</span></div>
+                <div class="card-info"><i class='bx bx-time'></i><span>Experience: 37+ years</span></div>
+                <div class="card-info"><i class='bx bx-map'></i><span>New Delhi</span></div>
+                <span class="badge">Veteran Cardiologist</span><br>
+                <a href="tel:+911124226888" class="contact-button">Book Appointment</a>
+            </div>
+        </div>
+    
+        <!-- Cardiologist Card 10 -->
+        <div class="card">
+            <img src="https://images.pexels.com/photos/8376306/pexels-photo-8376306.jpeg" alt="Dr. Rajneesh Kapoor" class="card-image">
+            <div class="card-content">
+                <h3 class="card-title">Dr. Rajneesh Kapoor</h3>
+                <p class="card-subtitle">Director, Interventional Cardiology</p>
+                <div class="card-info"><i class='bx bx-money'></i><span>Consultation: ₹2,200</span></div>
+                <div class="card-info"><i class='bx bx-time'></i><span>Experience: 25+ years</span></div>
+                <div class="card-info"><i class='bx bx-map'></i><span>Gurugram, Haryana</span></div>
+                <span class="badge">Specialist in Angioplasty</span><br>
+                <a href="tel:+911246663444" class="contact-button">Book Appointment</a>
+            </div>
+        </div>
+    </div>
+    
+
+    <h2 class="section-title">Top Cardiac Hospitals</h2>
+    <div class="cards-container">
+        <!-- Hospital Card 1 -->
+        <div class="card">
+            <img src="https://images.pexels.com/photos/668298/pexels-photo-668298.jpeg" alt="Medanta - The Medicity" class="card-image">
+            <div class="card-content">
+                <h3 class="card-title">Medanta - The Medicity</h3>
+                <p class="card-subtitle">Multi-Super Specialty Hospital</p>
+                <div class="card-info"><i class='bx bx-building'></i><span>1500+ beds</span></div>
+                <div class="card-info"><i class='bx bx-map'></i><span>Sector 38, Gurugram, Haryana</span></div>
+                <div class="card-info"><i class='bx bx-phone'></i><span>+91-124-4141414</span></div>
+                <span class="badge">NABH Accredited</span><br>
+                <a href="https://www.medanta.org" class="contact-button">Visit Website</a>
+            </div>
+        </div>
+    
+        <!-- Hospital Card 2 -->
+        <div class="card">
+            <img src="https://images.pexels.com/photos/263402/pexels-photo-263402.jpeg" alt="Apollo Hospitals" class="card-image">
+            <div class="card-content">
+                <h3 class="card-title">Apollo Hospitals</h3>
+                <p class="card-subtitle">Chain of Multispecialty Hospitals</p>
+                <div class="card-info"><i class='bx bx-building'></i><span>2000+ beds</span></div>
+                <div class="card-info"><i class='bx bx-map'></i><span>Chennai, Tamil Nadu</span></div>
+                <div class="card-info"><i class='bx bx-phone'></i><span>+91-44-28293333</span></div>
+                <span class="badge">JCI Accredited</span><br>
+                <a href="https://www.apollohospitals.com" class="contact-button">Visit Website</a>
+            </div>
+        </div>
+    
+        <!-- Hospital Card 3 -->
+        <div class="card">
+            <img src="https://images.pexels.com/photos/305568/pexels-photo-305568.jpeg" alt="Fortis Escorts Heart Institute" class="card-image">
+            <div class="card-content">
+                <h3 class="card-title">Fortis Escorts Heart Institute</h3>
+                <p class="card-subtitle">Heart Care Super Specialty</p>
+                <div class="card-info"><i class='bx bx-building'></i><span>310+ beds</span></div>
+                <div class="card-info"><i class='bx bx-map'></i><span>Okhla Road, New Delhi</span></div>
+                <div class="card-info"><i class='bx bx-phone'></i><span>+91-11-47135000</span></div>
+                <span class="badge">NABL Certified Labs</span><br>
+                <a href="https://www.fortisescorts.in" class="contact-button">Visit Website</a>
+            </div>
+        </div>
+    
+        <!-- Hospital Card 4 -->
+        <div class="card">
+            <img src="https://images.pexels.com/photos/263210/pexels-photo-263210.jpeg" alt="Narayana Health" class="card-image">
+            <div class="card-content">
+                <h3 class="card-title">Narayana Health</h3>
+                <p class="card-subtitle">Affordable Cardiac Care</p>
+                <div class="card-info"><i class='bx bx-building'></i><span>600+ beds</span></div>
+                <div class="card-info"><i class='bx bx-map'></i><span>Bangalore, Karnataka</span></div>
+                <div class="card-info"><i class='bx bx-phone'></i><span>+91-80-71223333</span></div>
+                <span class="badge">ISO 9001:2008 Certified</span><br>
+                <a href="https://www.narayanahealth.org" class="contact-button">Visit Website</a>
+            </div>
+        </div>
+    
+        <!-- Hospital Card 5 -->
+        <div class="card">
+            <img src="https://images.pexels.com/photos/422612/pexels-photo-422612.jpeg" alt="AIIMS Delhi" class="card-image">
+            <div class="card-content">
+                <h3 class="card-title">AIIMS Delhi</h3>
+                <p class="card-subtitle">Premier Govt. Medical Institute</p>
+                <div class="card-info"><i class='bx bx-building'></i><span>2500+ beds</span></div>
+                <div class="card-info"><i class='bx bx-map'></i><span>Ansari Nagar, New Delhi</span></div>
+                <div class="card-info"><i class='bx bx-phone'></i><span>+91-11-26588500</span></div>
+                <span class="badge">Top Ranked Medical College</span><br>
+                <a href="https://www.aiims.edu" class="contact-button">Visit Website</a>
+            </div>
+        </div>
+    
+        <!-- Hospital Card 6 -->
+        <div class="card">
+            <img src="https://images.pexels.com/photos/7088480/pexels-photo-7088480.jpeg" alt="Max Super Speciality Hospital" class="card-image">
+            <div class="card-content">
+                <h3 class="card-title">Max Super Speciality Hospital</h3>
+                <p class="card-subtitle">Advanced Healthcare Services</p>
+                <div class="card-info"><i class='bx bx-building'></i><span>500+ beds</span></div>
+                <div class="card-info"><i class='bx bx-map'></i><span>Saket, New Delhi</span></div>
+                <div class="card-info"><i class='bx bx-phone'></i><span>+91-11-26515050</span></div>
+                <span class="badge">NABH Accredited</span><br>
+                <a href="https://www.maxhealthcare.in" class="contact-button">Visit Website</a>
+            </div>
+        </div>
+    
+        <!-- Hospital Card 7 -->
+        <div class="card">
+            <img src="https://images.pexels.com/photos/2324837/pexels-photo-2324837.jpeg" alt="Kokilaben Dhirubhai Ambani Hospital" class="card-image">
+            <div class="card-content">
+                <h3 class="card-title">Kokilaben Dhirubhai Ambani Hospital</h3>
+                <p class="card-subtitle">Tertiary Care Facility</p>
+                <div class="card-info"><i class='bx bx-building'></i><span>750+ beds</span></div>
+                <div class="card-info"><i class='bx bx-map'></i><span>Andheri West, Mumbai</span></div>
+                <div class="card-info"><i class='bx bx-phone'></i><span>+91-22-30999999</span></div>
+                <span class="badge">Advanced Robotic Surgery</span><br>
+                <a href="https://www.kokilabenhospital.com" class="contact-button">Visit Website</a>
+            </div>
+        </div>
+    
+        <!-- Hospital Card 8 -->
+        <div class="card">
+            <img src="https://images.pexels.com/photos/3938022/pexels-photo-3938022.jpeg" alt="BLK-Max Super Speciality Hospital" class="card-image">
+            <div class="card-content">
+                <h3 class="card-title">BLK-Max Super Speciality Hospital</h3>
+                <p class="card-subtitle">State-of-the-Art Infrastructure</p>
+                <div class="card-info"><i class='bx bx-building'></i><span>650+ beds</span></div>
+                <div class="card-info"><i class='bx bx-map'></i><span>Rajendra Place, New Delhi</span></div>
+                <div class="card-info"><i class='bx bx-phone'></i><span>+91-11-30403040</span></div>
+                <span class="badge">Global Healthcare Standards</span><br>
+                <a href="https://www.blkhospital.com" class="contact-button">Visit Website</a>
+            </div>
+        </div>
+    
+        <!-- Hospital Card 9 -->
+        <div class="card">
+            <img src="https://images.pexels.com/photos/305568/pexels-photo-305568.jpeg" alt="Manipal Hospitals" class="card-image">
+            <div class="card-content">
+                <h3 class="card-title">Manipal Hospitals</h3>
+                <p class="card-subtitle">Leading Multi-specialty Network</p>
+                <div class="card-info"><i class='bx bx-building'></i><span>800+ beds</span></div>
+                <div class="card-info"><i class='bx bx-map'></i><span>Bangalore, Karnataka</span></div>
+                <div class="card-info"><i class='bx bx-phone'></i><span>+91-80-22221111</span></div>
+                <span class="badge">Trusted by Millions</span><br>
+                <a href="https://www.manipalhospitals.com" class="contact-button">Visit Website</a>
+            </div>
+        </div>
+    
+        <!-- Hospital Card 10 -->
+        <div class="card">
+            <img src="https://images.pexels.com/photos/8460060/pexels-photo-8460060.jpeg" alt="Sir Ganga Ram Hospital" class="card-image">
+            <div class="card-content">
+                <h3 class="card-title">Sir Ganga Ram Hospital</h3>
+                <p class="card-subtitle">Private Multi-Specialty Hospital</p>
+                <div class="card-info"><i class='bx bx-building'></i><span>675+ beds</span></div>
+                <div class="card-info"><i class='bx bx-map'></i><span>Rajinder Nagar, New Delhi</span></div>
+                <div class="card-info"><i class='bx bx-phone'></i><span>+91-11-25750000</span></div>
+                <span class="badge">Reputed Medical Excellence</span><br>
+                <a href="https://www.sgrh.com" class="contact-button">Visit Website</a>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Add smooth scrolling for better user experience
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Lazy loading for images
+        document.addEventListener('DOMContentLoaded', function() {
+            const images = document.querySelectorAll('img');
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        observer.unobserve(img);
+                    }
+                });
+            });
+
+            images.forEach(img => imageObserver.observe(img));
+        });
+    </script>
+</body>
+</html>

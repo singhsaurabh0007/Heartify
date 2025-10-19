@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stress Management | Heart Disease Prevention</title>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e40af;
+            --primary-light: #3b82f6;
+            --secondary: #475569;
+            --background: #f8fafc;
+            --white: #ffffff;
+            --accent: #f97316;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --pale-blue: #f0f9ff;
+            --pale-green: #ecfdf5;
+            --pale-purple: #f5f3ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(to bottom, #f0f9ff, var(--white));
+            color: var(--secondary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-light);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                        url('https://images.pexels.com/photos/3759661/pexels-photo-3759661.jpeg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 6rem 0;
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .back-home {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--white);
+            color: var(--primary);
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .back-home:hover {
+            background-color: var(--primary);
+            color: var(--white);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        /* Content Sections */
+        .content-section {
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 3rem;
+            overflow: hidden;
+        }
+
+        .section-header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem;
+        }
+
+        .section-header h2 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+
+        .section-body {
+            padding: 2rem;
+        }
+
+        /* Key facts */
+        .key-facts {
+            margin: 2rem 0;
+        }
+
+        .fact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .fact-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .fact-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .fact-content h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Stress Management Techniques */
+        .techniques-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .technique-card {
+            background-color: var(--pale-blue);
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .technique-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background-color: var(--primary);
+        }
+
+        .technique-card:nth-child(2) {
+            background-color: var(--pale-green);
+        }
+
+        .technique-card:nth-child(2)::before {
+            background-color: var(--success);
+        }
+
+        .technique-card:nth-child(3) {
+            background-color: var(--pale-purple);
+        }
+
+        .technique-card:nth-child(3)::before {
+            background-color: #8b5cf6;
+        }
+
+        .technique-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .technique-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .technique-card:nth-child(2) .technique-icon {
+            color: var(--success);
+        }
+
+        .technique-card:nth-child(3) .technique-icon {
+            color: #8b5cf6;
+        }
+
+        .technique-card h3 {
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+            font-size: 1.3rem;
+        }
+
+        .technique-card:nth-child(2) h3 {
+            color: var(--success);
+        }
+
+        .technique-card:nth-child(3) h3 {
+            color: #8b5cf6;
+        }
+
+        .technique-steps {
+            margin-top: 1rem;
+        }
+
+        .technique-steps li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .technique-steps li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+
+        /* Breathing Exercise Tool */
+        .exercise-tool {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .breathing-circle {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: rgba(59, 130, 246, 0.1);
+            border: 3px solid var(--primary);
+            margin: 2rem auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            transition: transform 0.3s;
+        }
+
+        .breathing-text {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .exercise-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-light);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-secondary {
+            background: #e2e8f0;
+            color: var(--secondary);
+        }
+
+        .btn-secondary:hover {
+            background: #cbd5e1;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .breathing-instructions {
+            margin-top: 1.5rem;
+            font-style: italic;
+            color: var(--secondary);
+        }
+
+        /* Image Slider */
+        .slider-container {
+            position: relative;
+            max-width: 100%;
+            margin: 2rem 0;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .slide {
+            min-width: 100%;
+            transition: opacity 0.5s;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .slide-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0));
+            color: white;
+            padding: 1.5rem;
+        }
+
+        .slide-content h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .slider-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #cbd5e1;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .slider-dot.active {
+            background: var(--primary);
+            transform: scale(1.2);
+        }
+
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.7);
+            color: var(--primary);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .slider-btn:hover {
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .prev-btn {
+            left: 15px;
+        }
+
+        .next-btn {
+            right: 15px;
+        }
+
+        /* Video Section */
+        .video-container {
+            margin: 2rem 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .video-responsive {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-responsive iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Daily Stress Tracker */
+        .tracker-container {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 8px;
+        }
+
+        .stress-scale {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .stress-level {
+            position: relative;
+            height: 30px;
+            background: linear-gradient(to right, #4ade80, #fcd34d, #f87171);
+            border-radius: 15px;
+        }
+
+        .stress-slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 30px;
+            background: transparent;
+            outline: none;
+            margin: 0;
+            z-index: 2;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .stress-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: white;
+            cursor: pointer;
+            border: 2px solid var(--primary);
+            margin-top: 3px;
+        }
+
+        .stress-slider::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: white;
+            cursor: pointer;
+            border: 2px solid var(--primary);
+        }
+
+        .scale-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+        }
+
+        .scale-label {
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .stress-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .stress-action-btn {
+            background: var(--white);
+            border: 1px solid #e2e8f0;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .stress-action-btn:hover {
+            background: var(--primary-light);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Research and Survey */
+        .research-card {
+            background: #f8fafc;
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .research-source {
+            font-style: italic;
+            color: var(--secondary);
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: var(--white);
+            padding: 3rem 0 1.5rem;
+            margin-top: 4rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: #e2e8f0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Journal Entry Section */
+        .journal-container {
+            margin: 2rem 0;
+        }
+
+        .journal-form textarea {
+            width: 100%;
+            min-height: 150px;
+            padding: 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            font-family: inherit;
+            resize: vertical;
+        }
+
+        .journal-form textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+
+        .journal-entry {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .journal-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .journal-date {
+            font-weight: 500;
+            color: var(--primary);
+        }
+
+        .journal-stress {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .journal-stress-level {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+        }
+
+        .stress-low {
+            background-color: #4ade80;
+        }
+
+        .stress-medium {
+            background-color: #fcd34d;
+        }
+
+        .stress-high {
+            background-color: #f87171;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .fact-item {
+                flex-direction: column;
+            }
+
+            .fact-icon {
+                margin-bottom: 1rem;
+            }
+
+            .slider-btn {
+                width: 30px;
+                height: 30px;
+                font-size: 1rem;
+            }
+
+            .breathing-circle {
+                width: 150px;
+                height: 150px;
+            }
+        }
+
+        @keyframes breathe-in {
+            from {
+                transform: scale(1);
+            }
+            to {
+                transform: scale(1.2);
+            }
+        }
+
+        @keyframes breathe-out {
+            from {
+                transform: scale(1.2);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes breathe-hold {
+            from {
+                transform: scale(1.2);
+            }
+            to {
+                transform: scale(1.2);
+            }
+        }
+    </style>
+</head>
+<body>
+   
+
+    <section class="hero">
+        <div class="container">
+            <h1>Stress Management</h1>
+            <p class="hero-subtitle">Chronic stress can significantly impact heart health. Learn effective techniques to manage stress and reduce your risk of cardiovascular disease.</p>
+            <a href="prevation.html" class="back-home">
+                <i class='bx bx-arrow-back'></i> Back to Home
+            </a>
+        </div>
+    </section>
+
+    <main class="container">
+        <section id="impact" class="content-section">
+            <div class="section-header">
+                <h2>The Impact of Stress on Heart Health</h2>
+            </div>
+            <div class="section-body">
+                <p>Stress is your body's response to situations that are perceived as challenging or threatening. While short-term stress is a normal part of life, chronic stress can have serious implications for your heart health.</p>
+                
+                <div class="key-facts">
+                    <div class="fact-item">
+                        <i class='bx bx-check-circle fact-icon'></i>
+                        <div class="fact-content">
+                            <h3>Stress Hormones</h3>
+                            <p>When you're stressed, your body releases hormones like adrenaline and cortisol. These can increase blood pressure, heart rate, and blood sugar levels, all of which can impact heart health over time.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="fact-item">
+                        <i class='bx bx-check-circle fact-icon'></i>
+                        <div class="fact-content">
+                            <h3>Inflammation</h3>
+                            <p>Chronic stress promotes systemic inflammation, which is a known risk factor for heart disease. It can contribute to the buildup of plaque in arteries and increase the risk of blood clots.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="fact-item">
+                        <i class='bx bx-check-circle fact-icon'></i>
+                        <div class="fact-content">
+                            <h3>Behavioral Impact</h3>
+                            <p>Stress often leads to unhealthy coping behaviors such as smoking, excessive alcohol consumption, poor diet choices, and physical inactivity, all of which are risk factors for heart disease.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="slider-container">
+                    <div class="slider">
+                        <div class="slide">
+                            <img src="https://images.pexels.com/photos/897817/pexels-photo-897817.jpeg" alt="Stress Physiology">
+                            <div class="slide-content">
+                                <h3>The Physiology of Stress</h3>
+                                <p>During stress, your body's "fight-or-flight" response activates, releasing stress hormones that prepare your body for action by increasing heart rate and blood pressure.</p>
+                            </div>
+                        </div>
+                        <div class="slide">
+                            <img src="https://images.pexels.com/photos/3807738/pexels-photo-3807738.jpeg" alt="Chronic Stress">
+                            <div class="slide-content">
+                                <h3>Chronic Stress Effects</h3>
+                                <p>When stress becomes chronic, the persistent elevation of stress hormones can damage blood vessels and increase the risk of hypertension, heart attack, and stroke.</p>
+                            </div>
+                        </div>
+                        <div class="slide">
+                            <img src="https://images.pexels.com/photos/3094230/pexels-photo-3094230.jpeg" alt="Stress Management">
+                            <div class="slide-content">
+                                <h3>The Power of Management</h3>
+                                <p>Effective stress management techniques can help reduce the physical impact of stress on your heart and improve overall cardiovascular health.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="slider-btn prev-btn"><i class='bx bx-chevron-left'></i></button>
+                    <button class="slider-btn next-btn"><i class='bx bx-chevron-right'></i></button>
+                    <div class="slider-nav">
+                        <div class="slider-dot active"></div>
+                        <div class="slider-dot"></div>
+                        <div class="slider-dot"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="techniques" class="content-section">
+            <div class="section-header">
+                <h2>Effective Stress Management Techniques</h2>
+            </div>
+            <div class="section-body">
+                <p>There are many scientifically-proven techniques that can help you manage stress effectively. Here are some of the most beneficial approaches:</p>
+                
+                <div class="techniques-grid">
+                    <div class="technique-card">
+                        <i class='bx bx-spa technique-icon'></i>
+                        <h3>Mindfulness Meditation</h3>
+                        <p>Mindfulness involves focusing your awareness on the present moment, acknowledging and accepting feelings, thoughts, and bodily sensations without judgment.</p>
+                        <div class="technique-steps">
+                            <p><strong>How to practice:</strong></p>
+                            <ul>
+                                <li>Find a quiet place to sit comfortably</li>
+                                <li>Focus on your breath, noticing the sensation of air moving in and out</li>
+                                <li>When your mind wanders, gently bring your attention back to your breath</li>
+                                <li>Start with 5 minutes daily and gradually increase</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="technique-card">
+                        <i class='bx bx-body technique-icon'></i>
+                        <h3>Progressive Muscle Relaxation</h3>
+                        <p>This technique involves tensing and then releasing different muscle groups in sequence, helping to release physical tension associated with stress.</p>
+                        <div class="technique-steps">
+                            <p><strong>How to practice:</strong></p>
+                            <ul>
+                                <li>Lie down or sit in a comfortable position</li>
+                                <li>Tense each muscle group for 5 seconds (feet, legs, abdomen, chest, hands, arms, shoulders, face)</li>
+                                <li>Release the tension and notice the feeling of relaxation for 10-20 seconds</li>
+                                <li>Move to the next muscle group and repeat</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="technique-card">
+                        <i class='bx bx-run technique-icon'></i>
+                        <h3>Physical Activity</h3>
+                        <p>Regular exercise has powerful stress-reducing benefits. It helps lower stress hormones like cortisol and releases endorphins, which improve mood and act as natural painkillers.</p>
+                        <div class="technique-steps">
+                            <p><strong>How to incorporate:</strong></p>
+                            <ul>
+                                <li>Aim for at least 30 minutes of moderate activity most days</li>
+                                <li>Choose activities you enjoy (walking, swimming, cycling, dancing)</li>
+                                <li>Consider stress-specific exercises like yoga or tai chi</li>
+                                <li>Even brief amounts of physical activity offer stress-relief benefits</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="section-header">
+                <h2>Expert Guidance Video</h2>
+            </div>
+            <div class="section-body">
+                <p>Watch this informative video about how stress affects your heart and evidence-based strategies to reduce its impact:</p>
+                <div class="video-container">
+                    <div class="video-responsive">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/hnpQrMqDoqE" title="Stress and Heart Health" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <p>Learning to manage stress effectively is a critical component of maintaining heart health. The video above provides practical strategies that you can incorporate into your daily routine.</p>
+            </div>
+        </section>
+
+        <section id="tools" class="content-section">
+            <div class="section-header">
+                <h2>Interactive Stress Management Tools</h2>
+            </div>
+            <div class="section-body">
+                <h3>Guided Breathing Exercise</h3>
+                <p>Deep breathing is one of the simplest yet most effective ways to reduce stress. This interactive tool will guide you through a simple 4-7-8 breathing exercise.</p>
+                
+                <div class="exercise-tool">
+                    <h3>4-7-8 Breathing Technique</h3>
+                    <div class="breathing-circle" id="breathingCircle">
+                        <span class="breathing-text" id="breathingText">Ready</span>
+                    </div>
+                    <div class="exercise-controls">
+                        <button id="startBreathing" class="btn btn-primary">Start Exercise</button>
+                        <button id="stopBreathing" class="btn btn-secondary" disabled>Stop</button>
+                    </div>
+                    <p class="breathing-instructions">Follow the circle's expansion and contraction to guide your breathing. The exercise will repeat for 1 minute.</p>
+                </div>
+                
+                <h3>Stress Journal</h3>
+                <p>Keeping a stress journal can help you identify patterns and triggers of stress in your life, allowing you to develop targeted coping strategies.</p>
+                
+                <div class="journal-container">
+                    <div class="journal-form">
+                        <h4>Today's Entry</h4>
+                        <textarea id="journalEntry" placeholder="Write about what's causing you stress today, how it made you feel physically and emotionally, and what you did to cope..."></textarea>
+                        <div class="stress-scale">
+                            <p>Rate your stress level today:</p>
+                            <div class="stress-level">
+                                <input type="range" min="1" max="10" value="5" class="stress-slider" id="stressSlider">
+                            </div>
+                            <div class="scale-labels">
+                                <span class="scale-label">Low Stress</span>
+                                <span class="scale-label">Moderate</span>
+                                <span class="scale-label">High Stress</span>
+                            </div>
+                        </div>
+                        <button id="saveJournal" class="btn btn-primary">Save Entry</button>
+                    </div>
+                    
+                    <div id="journalEntries"></div>
+                </div>
+                
+                <h3>Quick Stress Relief Actions</h3>
+                <p>When you're feeling stressed, try one of these quick actions to help reduce your stress level:</p>
+                
+                <div class="stress-actions">
+                    <button class="stress-action-btn"><i class='bx bx-walk'></i> Take a 5-minute walk</button>
+                    <button class="stress-action-btn"><i class='bx bx-spa'></i> Practice deep breathing</button>
+                    <button class="stress-action-btn"><i class='bx bx-music'></i> Listen to calming music</button>
+                    <button class="stress-action-btn"><i class='bx bx-coffee'></i> Drink water or herbal tea</button>
+                    <button class="stress-action-btn"><i class='bx bx-body'></i> Stretch for 2 minutes</button>
+                    <button class="stress-action-btn"><i class='bx bx-phone'></i> Call a supportive friend</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="research" class="content-section">
+            <div class="section-header">
+                <h2>Research and Survey Findings</h2>
+            </div>
+            <div class="section-body">
+                <p>Scientific research consistently demonstrates the connection between stress and heart health. Here are some key findings from recent studies and surveys:</p>
+                
+                <div class="research-card">
+                    <h3>Stress and Cardiovascular Risk</h3>
+                    <p>A 2021 meta-analysis published in JAMA Network Open reviewed 56 studies involving over 700,000 participants and found that psychological distress, including stress, anxiety, and depression, was associated with a 27% increased risk of cardiovascular disease, independent of other risk factors.</p>
+                    <p class="research-source">Source: Liu H, et al. Association of Psychological Distress With Cardiovascular Disease Risk and Mortality: Pooled Analysis of 6 Prospective UK Cohort Studies. JAMA Network Open, 2021.</p>
+                </div>
+                
+                <div class="research-card">
+                    <h3>American Heart Association Stress Survey</h3>
+                    <p>According to a 2023 survey conducted by the American Heart Association, 75% of Americans reported experiencing at least moderate stress during the past year, yet only 24% of them engaged in regular stress management activities. Among those with established heart disease, the rates of reported stress were even higher (83%).</p>
+                    <p class="research-source">Source: American Heart Association National Stress and Heart Health Survey, 2023.</p>
+                </div>
+                
+                <div class="research-card">
+                    <h3>Workplace Stress and Heart Health</h3>
+                    <p>The INTERHEART study, one of the largest studies of its kind covering 52 countries, found that people who reported permanent stress at work had a 2.5-fold increased risk of heart attack compared to those who reported no work stress.</p>
+                    <p class="research-source">Source: Rosengren A, et al. Association of psychosocial risk factors with risk of acute myocardial infarction in 11,119 cases and 13,648 controls from 52 countries (the INTERHEART study): case-control study. The Lancet, 2004.</p>
+                </div>
+                
+                <div class="research-card">
+                    <h3>Effectiveness of Mind-Body Interventions</h3>
+                    <p>A systematic review and meta-analysis of 48 randomized controlled trials found that mind-body interventions such as meditation, yoga, and tai chi were associated with small to moderate improvements in heart disease risk factors, including blood pressure, heart rate, and cholesterol levels.</p>
+                    <p class="research-source">Source: Younge JO, et al. Mind-body practices for patients with cardiac disease: a systematic review and meta-analysis. European Journal of Preventive Cardiology, 2015.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h4>About HeartHealth</h4>
+                    <p>Dedicated to promoting heart health and preventing cardiovascular disease through education and awareness.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="diet.html">Heart-Healthy Diet</a></li>
+                        <li><a href="physical-activity.html">Physical Activity</a></li>
+                        <li><a href="blood-pressure.html">Blood Pressure</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <ul class="footer-links">
+                        <li><i class='bx bx-phone'></i> (123) 456-7890</li>
+                        <li><i class='bx bx-envelope'></i> info@hearthealth.org</li>
+                        <li><i class='bx bx-map'></i> 123 Health Street, Medical District</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 HeartHealth. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Slider functionality
+        const slider = document.querySelector('.slider');
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.slider-dot');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+        let currentSlide = 0;
+        const slideCount = slides.length;
+        
+        function goToSlide(index) {
+            if (index < 0) index = slideCount - 1;
+            if (index >= slideCount) index = 0;
+            
+            slider.style.transform = `translateX(-${index * 100}%)`;
+            currentSlide = index;
+            
+            // Update dots
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentSlide);
+            });
+        }
+        
+        // Set up event listeners
+        prevBtn.addEventListener('click', () => goToSlide(currentSlide - 1));
+        nextBtn.addEventListener('click', () => goToSlide(currentSlide + 1));
+        
+        dots.forEach((dot, i) => {
+            dot.addEventListener('click', () => goToSlide(i));
+        });
+        
+        // Auto-advance slides
+        let slideInterval = setInterval(() => {
+            goToSlide(currentSlide + 1);
+        }, 5000);
+        
+        // Pause auto-advance on hover
+        slider.addEventListener('mouseenter', () => {
+            clearInterval(slideInterval);
+        });
+        
+        slider.addEventListener('mouseleave', () => {
+            slideInterval = setInterval(() => {
+                goToSlide(currentSlide + 1);
+            }, 5000);
+        });
+        
+        // Breathing Exercise Functionality
+        const breathingCircle = document.getElementById('breathingCircle');
+        const breathingText = document.getElementById('breathingText');
+        const startBreathingBtn = document.getElementById('startBreathing');
+        const stopBreathingBtn = document.getElementById('stopBreathing');
+        let breathingInterval;
+        
+        function startBreathingExercise() {
+            let phase = 0; // 0: inhale, 1: hold, 2: exhale
+            let counter = 0;
+            
+            startBreathingBtn.disabled = true;
+            stopBreathingBtn.disabled = false;
+            
+            breathingInterval = setInterval(() => {
+                if (phase === 0) { // Inhale
+                    breathingText.textContent = `Inhale (${4 - counter})`;
+                    breathingCircle.style.animation = 'breathe-in 4s forwards';
+                    counter++;
+                    if (counter >= 4) {
+                        counter = 0;
+                        phase = 1;
+                    }
+                } else if (phase === 1) { // Hold
+                    breathingText.textContent = `Hold (${7 - counter})`;
+                    breathingCircle.style.animation = 'breathe-hold 7s forwards';
+                    counter++;
+                    if (counter >= 7) {
+                        counter = 0;
+                        phase = 2;
+                    }
+                } else { // Exhale
+                    breathingText.textContent = `Exhale (${8 - counter})`;
+                    breathingCircle.style.animation = 'breathe-out 8s forwards';
+                    counter++;
+                    if (counter >= 8) {
+                        counter = 0;
+                        phase = 0;
+                    }
+                }
+            }, 1000);
+            
+            // Stop after 1 minute (60000 ms)
+            setTimeout(() => {
+                stopBreathingExercise();
+            }, 60000);
+        }
+        
+        function stopBreathingExercise() {
+            clearInterval(breathingInterval);
+            breathingText.textContent = 'Ready';
+            breathingCircle.style.animation = 'none';
+            startBreathingBtn.disabled = false;
+            stopBreathingBtn.disabled = true;
+        }
+        
+        startBreathingBtn.addEventListener('click', startBreathingExercise);
+        stopBreathingBtn.addEventListener('click', stopBreathingExercise);
+        
+        // Stress Journal Functionality
+        const journalEntry = document.getElementById('journalEntry');
+        const stressSlider = document.getElementById('stressSlider');
+        const saveJournalBtn = document.getElementById('saveJournal');
+        const journalEntries = document.getElementById('journalEntries');
+        
+        // Load entries from local storage
+        let entries = JSON.parse(localStorage.getItem('stressJournal')) || [];
+        
+        // Display existing entries
+        function displayEntries() {
+            journalEntries.innerHTML = '';
+            
+            // Get the most recent 3 entries
+            const recentEntries = entries.slice(0, 3);
+            
+            if (recentEntries.length === 0) {
+                journalEntries.innerHTML = '<p>No journal entries yet. Start tracking your stress by adding an entry above.</p>';
+                return;
+            }
+            
+            recentEntries.forEach(entry => {
+                const entryElement = document.createElement('div');
+                entryElement.className = 'journal-entry';
+                
+                const stressClass = entry.stressLevel <= 3 ? 'stress-low' : (entry.stressLevel <= 7 ? 'stress-medium' : 'stress-high');
+                
+                entryElement.innerHTML = `
+                    <div class="journal-header">
+                        <span class="journal-date">${entry.date}</span>
+                        <div class="journal-stress">
+                            <span>Stress Level: ${entry.stressLevel}/10</span>
+                            <div class="journal-stress-level ${stressClass}"></div>
+                        </div>
+                    </div>
+                    <p>${entry.text}</p>
+                `;
+                
+                journalEntries.appendChild(entryElement);
+            });
+        }
+        
+        // Save a new entry
+        function saveEntry() {
+            const text = journalEntry.value.trim();
+            const stressLevel = parseInt(stressSlider.value);
+            
+            if (!text) {
+                alert('Please write something in your journal entry.');
+                return;
+            }
+            
+            const now = new Date();
+            const dateString = now.toLocaleDateString() + ' ' + now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            
+            const newEntry = {
+                text,
+                stressLevel,
+                date: dateString
+            };
+            
+            entries.unshift(newEntry); // Add to beginning of array
+            
+            // Keep only the most recent 10 entries
+            if (entries.length > 10) {
+                entries = entries.slice(0, 10);
+            }
+            
+            // Save to local storage
+            localStorage.setItem('stressJournal', JSON.stringify(entries));
+            
+            // Clear form and update display
+            journalEntry.value = '';
+            stressSlider.value = 5;
+            displayEntries();
+        }
+        
+        saveJournalBtn.addEventListener('click', saveEntry);
+        
+        // Display entries on load
+        displayEntries();
+        
+        // Quick Stress Relief Action Buttons
+        const actionButtons = document.querySelectorAll('.stress-action-btn');
+        
+        actionButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Highlight the selected action
+                actionButtons.forEach(btn => btn.style.backgroundColor = '');
+                this.style.backgroundColor = 'rgba(59, 130, 246, 0.1)';
+                
+                // Show a message
+                alert(`Try this technique now: ${this.textContent}`);
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

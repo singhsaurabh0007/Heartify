@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Disease Prevention</title>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e40af;
+            --primary-light: #3b82f6;
+            --secondary: #475569;
+            --background: #f8fafc;
+            --white: #ffffff;
+            --accent: #f97316;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(to bottom, #f0f9ff, var(--white));
+            color: var(--secondary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            position: sticky;
+            top: 0;
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-light);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+        }
+
+        .hero h1 {
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        /* Prevention Cards */
+        .prevention-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        .prevention-card {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            position: relative;
+            height: 100%;
+        }
+
+        .prevention-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0) 70%, rgba(0,0,0,0.05) 100%);
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .prevention-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .prevention-card:hover::after {
+            opacity: 1;
+        }
+
+        .card-link {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            height: 100%;
+        }
+
+        .card-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .prevention-card:hover .card-image img {
+            transform: scale(1.1);
+        }
+
+        .card-content {
+            padding: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .card-icon {
+            color: var(--primary);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            color: var(--primary);
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-arrow {
+            position: absolute;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            color: var(--primary);
+            font-size: 1.5rem;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: opacity 0.3s, transform 0.3s;
+        }
+
+        .prevention-card:hover .card-arrow {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Diet Section */
+        .diet-section {
+            padding: 4rem 0;
+        }
+
+        .food-group {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        @media (min-width: 768px) {
+            .food-group {
+                flex-direction: row;
+            }
+        }
+
+        .food-image {
+            flex: 1;
+            min-height: 300px;
+        }
+
+        .food-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .food-content {
+            flex: 2;
+            padding: 2rem;
+        }
+
+        .food-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .food-item {
+            background: #f0f9ff;
+            padding: 1rem;
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+
+        .food-item:hover {
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: var(--white);
+            padding: 3rem 0 1.5rem;
+            margin-top: 4rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: #e2e8f0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .prevention-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* "Learn More" button style */
+        .learn-more {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.5rem 1.5rem;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .learn-more:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-2px);
+        }
+
+        /* Special pulse animation for the hero CTA */
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(30, 64, 175, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(30, 64, 175, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(30, 64, 175, 0);
+            }
+        }
+    </style>
+</head>
+<body>
+   
+
+    <main class="container">
+        <section class="hero">
+            <h1>Heart Disease Prevention</h1>
+            <p>Heart disease can often be prevented by making simple lifestyle changes. Learn about key preventive measures that can significantly reduce your risk.</p>
+            <a href="homepage.html" class="learn-more pulse-animation"><- Back to home</a>
+        </section>
+
+        <section id="prevention" class="prevention-grid">
+            <div class="prevention-card">
+                <a href="diet.html" target="_blank" class="card-link">
+                    <div class="card-image">
+                        <img src="https://images.pexels.com/photos/1640774/pexels-photo-1640774.jpeg" alt="Healthy Diet">
+                    </div>
+                    <div class="card-content">
+                        <i class='bx bx-dish card-icon'></i>
+                        <h3 class="card-title">Heart-Healthy Diet</h3>
+                        <p>Focus on fruits, vegetables, whole grains, and lean proteins. Limit processed foods and excess salt.</p>
+                        <i class='bx bx-right-arrow-alt card-arrow'></i>
+                    </div>
+                </a>
+            </div>
+
+            <div class="prevention-card">
+                <a href="physical-activity.html" target="_blank" class="card-link">
+                    <div class="card-image">
+                        <img src="https://images.pexels.com/photos/2803158/pexels-photo-2803158.jpeg" alt="Physical Activity">
+                    </div>
+                    <div class="card-content">
+                        <i class='bx bx-run card-icon'></i>
+                        <h3 class="card-title">Physical Activity</h3>
+                        <p>Aim for at least 30 minutes of moderate exercise most days of the week.</p>
+                        <i class='bx bx-right-arrow-alt card-arrow'></i>
+                    </div>
+                </a>
+            </div>
+
+            <div class="prevention-card">
+                <a href="blood-pressure.html" target="_blank" class="card-link">
+                    <div class="card-image">
+                        <img src="https://images.pexels.com/photos/4226925/pexels-photo-4226925.jpeg" alt="Blood Pressure">
+                    </div>
+                    <div class="card-content">
+                        <i class='bx bx-pulse card-icon'></i>
+                        <h3 class="card-title">Monitor Blood Pressure</h3>
+                        <p>Regular blood pressure monitoring and management is crucial for heart health.</p>
+                        <i class='bx bx-right-arrow-alt card-arrow'></i>
+                    </div>
+                </a>
+            </div>
+
+            <div class="prevention-card">
+                <a href="stress-management.html" target="_blank" class="card-link">
+                    <div class="card-image">
+                        <img src="https://images.pexels.com/photos/3759661/pexels-photo-3759661.jpeg" alt="Stress Management">
+                    </div>
+                    <div class="card-content">
+                        <i class='bx bx-spa card-icon'></i>
+                        <h3 class="card-title">Stress Management</h3>
+                        <p>Practice stress-reduction techniques like meditation and deep breathing.</p>
+                        <i class='bx bx-right-arrow-alt card-arrow'></i>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <section id="diet" class="diet-section">
+            <h2>Heart-Healthy Diet Recommendations</h2>
+            <div class="food-group">
+                <div class="food-image">
+                    <img src="https://images.pexels.com/photos/1435904/pexels-photo-1435904.jpeg" alt="Fruits and Vegetables">
+                </div>
+                <div class="food-content">
+                    <h3>Fruits & Vegetables</h3>
+                    <p>Rich in vitamins, minerals, and antioxidants that help protect your heart.</p>
+                    <div class="food-items">
+                        <div class="food-item">
+                            <h4>Berries</h4>
+                            <p>High in heart-healthy antioxidants</p>
+                        </div>
+                        <div class="food-item">
+                            <h4>Leafy Greens</h4>
+                            <p>Contains nitrates that help lower blood pressure</p>
+                        </div>
+                        <div class="food-item">
+                            <h4>Citrus Fruits</h4>
+                            <p>Rich in vitamin C and flavonoids</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h4>About Us</h4>
+                    <p>Dedicated to promoting heart health and preventing cardiovascular disease through education and awareness.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#prevention">Prevention Tips</a></li>
+                        <li><a href="#diet">Diet</a></li>
+                        <li><a href="#">Resources</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <ul class="footer-links">
+                        <li><i class='bx bx-phone'></i> (123) 456-7890</li>
+                        <li><i class='bx bx-envelope'></i> info@hearthealth.org</li>
+                        <li><i class='bx bx-map'></i> 123 Health Street, Medical District</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 HeartHealth. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Add smooth scrolling to all links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.boxShadow = 'none';
+            }
+        });
+
+        // Add animation to cards on scroll
+        const cards = document.querySelectorAll('.prevention-card');
+        const observer = new IntersectionObserver(
+            entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            },
+            { threshold: 0.1 }
+        );
+
+        cards.forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'all 0.5s ease-out';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
